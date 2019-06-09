@@ -4,29 +4,40 @@
  * */
 
 
+$basePath = "/mcq/";
 function getBasePath(){
-    return __DIR__.'/../';
+    global $basePath;
+    return  $basePath;
 
 }
 function getAssets($file=""){
-    return '../assets/'.$file;
+    global $basePath;
+    return $basePath.'assets/'.$file;
 }
 
 function getConfig($file=""){
-    return '../config/'.$file;
+    global $basePath;
+    return $basePath.'config/'.$file;
 }
 
 function getIncludes($file=""){
-    return '../includes/'.$file;
+    global $basePath;
+    return $basePath.'includes/'.$file;
 }
 function getPublic($file=""){
-    return '../public/'.$file;
+    global $basePath;
+    return $basePath.'public/'.$file;
 
+}
+function getPages($file = ""){
+    global $basePath;
+    return $basePath.'pages/'/$file;
 }
 
 
 function getModels($file=""){
-    return __DIR__.'/../models/'.$file;
+    global $basePath;
+    return $basePath.'/models/'.$file;
 
 }
 
@@ -34,7 +45,7 @@ function getModels($file=""){
  * For testing
  *
  * */
-//echo getPublic();
+//echo getBasePath();
 
 
 

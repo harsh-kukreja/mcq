@@ -14559,7 +14559,7 @@ textarea[resize=horizontal] {
 }
 
 .navbar-vertical .navbar-nav .nav-link[data-toggle=collapse]:after {
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'FontAwesome';
     font-weight: 700;
     font-style: normal;
     font-variant: normal;

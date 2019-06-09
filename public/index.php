@@ -30,7 +30,7 @@
 <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
     <div class="container">
         <a class="navbar-brand"
-           href="https://demos.creative-tim.com/argon-dashboard-pro/pages/dashboards/dashboard.html">
+           href="#">
             <img src="<?php echo getPublic("images/argon/brand/white.png") ?>">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
