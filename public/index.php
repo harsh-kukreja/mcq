@@ -1,4 +1,5 @@
 <?php include_once("../helpers/helper.php") ?>
+<?php $page_title = "MCQ";?>
 <!DOCTYPE html>
 
 <html>

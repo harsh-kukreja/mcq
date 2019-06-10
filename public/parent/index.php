@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
-<?php include_once ("../../helpers/helper.php")?>
-<?php include_once("../../includes/header.php")?>
+
+<?php
+    $page_title = "Parent";
+include_once ("../../helpers/helper.php");
+
+include_once("../../includes/header.php")?>
 
 <body>
 <!-- Sidenav -->

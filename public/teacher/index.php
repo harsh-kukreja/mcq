@@ -1,3 +1,4 @@
+<?php $page_title = "Teacher"?>
 <!DOCTYPE html>
 <html>
 <?php include_once ("../../helpers/helper.php")?>

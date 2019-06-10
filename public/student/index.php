@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 
-<?php include_once ("../../helpers/helper.php");
+<?php
+    $page_title = "Student";
+include_once ("../../helpers/helper.php");
     include_once ("../../includes/header.php");
 ?>
 
