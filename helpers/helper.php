@@ -4,48 +4,58 @@
  * */
 
 
-$basePath = "/mcq/";
-function getBasePath(){
-    global $basePath;
-    return  $basePath;
+class Helper{
+    /*
+     * Please give the Absolute path in the basePath variable till the folder structure
+     * */
+    public $basePath = "/mcq/";
+    public function getBasePath(){
+
+        return  $this->basePath;
+
+    }
+    public function getAssets($file=""){
+
+        return $this->basePath.'assets/'.$file;
+    }
+
+    public function getConfig($file=""){
+
+        return $this->basePath.'config/'.$file;
+    }
+
+    public function getIncludes($file=""){
+
+        return $this->basePath.'includes/'.$file;
+    }
+    public function getPublic($file=""){
+
+        return $this->basePath.'public/'.$file;
+
+    }
+    public function getPages($file = ""){
+
+        return $this->basePath.'pages/'.$file;
+    }
+
+    public function getModels($file=""){
+
+        return $this->basePath.'/models/'.$file;
+
+    }
 
 }
-function getAssets($file=""){
-    global $basePath;
-    return $basePath.'assets/'.$file;
-}
-
-function getConfig($file=""){
-    global $basePath;
-    return $basePath.'config/'.$file;
-}
-
-function getIncludes($file=""){
-    global $basePath;
-    return $basePath.'includes/'.$file;
-}
-function getPublic($file=""){
-    global $basePath;
-    return $basePath.'public/'.$file;
-
-}
-function getPages($file = ""){
-    global $basePath;
-    return $basePath.'pages/'/$file;
-}
 
 
-function getModels($file=""){
-    global $basePath;
-    return $basePath.'/models/'.$file;
 
-}
 
 /*
  * For testing
  *
  * */
-//echo getBasePath();
+//$helper = new Helper();
+//$helper->getIncludes();
+
 
 
 

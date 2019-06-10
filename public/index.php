@@ -1,10 +1,14 @@
-<?php include_once("../helpers/helper.php") ?>
+    <?php
+    include_once("../helpers/helper.php");
+    $helper = new Helper(); ?>
+
 <?php $page_title = "MCQ";?>
 <!DOCTYPE html>
 
 <html>
 <?php
-    include_once ("../includes/header.php")
+    include_once ("../includes/header.php");
+
 ?>
 
 <body class="bg-default">
@@ -13,7 +17,8 @@
     <div class="container">
         <a class="navbar-brand"
            href="#">
-            <img src="<?php echo getPublic("images/argon/brand/white.png") ?>">
+            <img src="<?php
+            echo $helper->getPublic("images/argon/brand/white.png"); ?>">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
                 aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +29,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="https://demos.creative-tim.com/argon-dashboard-pro/pages/dashboards/dashboard.html">
-                            <img src="<?php getPublic("images/argon/brand/blue.png") ?>">
+                            <img src="<?php $helper->getPublic("images/argon/brand/blue.png") ?>">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">

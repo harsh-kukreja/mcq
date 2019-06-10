@@ -3,7 +3,9 @@
 
 <?php
     $page_title = "Student";
-include_once ("../../helpers/helper.php");
+
+include_once("../../helpers/helper.php");
+$helper = new Helper();
     include_once ("../../includes/header.php");
 ?>
 
@@ -15,7 +17,7 @@ include_once ("../../helpers/helper.php");
         <!-- Brand -->
         <div class="sidenav-header d-flex align-items-center">
             <a class="navbar-brand" href="#">
-                <img src="<?php echo getPublic("images/argon/brand/blue.png") ?>" class="navbar-brand-img" alt="...">
+                <img src="<?php echo $helper->getPublic("images/argon/brand/blue.png") ?>" class="navbar-brand-img" alt="...">
             </a>
             <div class="ml-auto">
                 <!-- Sidenav toggler -->
@@ -117,7 +119,7 @@ include_once ("../../helpers/helper.php");
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <!-- Avatar -->
-                                            <img alt="Image placeholder" src="<?php echo getPublic("images/argon/theme/team-1.jpg") ?>" class="avatar rounded-circle">
+                                            <img alt="Image placeholder" src="<?php echo $helper->getPublic("images/argon/theme/team-1.jpg") ?>" class="avatar rounded-circle">
                                         </div>
                                         <div class="col ml--2">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -136,7 +138,7 @@ include_once ("../../helpers/helper.php");
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <!-- Avatar -->
-                                            <img alt="Image placeholder" src="<?php echo getPublic("images/argon/theme/team-2.jpg") ?>" class="avatar rounded-circle">
+                                            <img alt="Image placeholder" src="<?php echo $helper->getPublic("images/argon/theme/team-2.jpg") ?>" class="avatar rounded-circle">
                                         </div>
                                         <div class="col ml--2">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -155,7 +157,7 @@ include_once ("../../helpers/helper.php");
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <!-- Avatar -->
-                                            <img alt="Image placeholder" src="<?php echo getPublic("images/argon/theme/team-3.jpg") ?>" class="avatar rounded-circle">
+                                            <img alt="Image placeholder" src="<?php echo $helper->getPublic("images/argon/theme/team-3.jpg") ?>" class="avatar rounded-circle">
                                         </div>
                                         <div class="col ml--2">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -174,7 +176,7 @@ include_once ("../../helpers/helper.php");
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <!-- Avatar -->
-                                            <img alt="Image placeholder" src="<?php echo getPublic("images/argon/theme/team-4.jpg") ?>" class="avatar rounded-circle">
+                                            <img alt="Image placeholder" src="<?php echo $helper->getPublic("images/argon/theme/team-4.jpg") ?>" class="avatar rounded-circle">
                                         </div>
                                         <div class="col ml--2">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -193,7 +195,7 @@ include_once ("../../helpers/helper.php");
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <!-- Avatar -->
-                                            <img alt="Image placeholder" src="<?php echo getPublic("images/argon/theme/team-5.jpg") ?>" class="avatar rounded-circle">
+                                            <img alt="Image placeholder" src="<?php echo $helper->getPublic("images/argon/theme/team-5.jpg") ?>" class="avatar rounded-circle">
                                         </div>
                                         <div class="col ml--2">
                                             <div class="d-flex justify-content-between align-items-center">
@@ -219,7 +221,7 @@ include_once ("../../helpers/helper.php");
                         <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="<?php echo getPublic("images/argon/theme/team-4.jpg") ?>">
+                    <img alt="Image placeholder" src="<?php echo $helper->getPublic("images/argon/theme/team-4.jpg") ?>">
                   </span>
                                 <div class="media-body ml-2 d-none d-lg-block">
                                     <span class="mb-0 text-sm  font-weight-bold">Rose Dawson</span>
