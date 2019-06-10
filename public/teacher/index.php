@@ -1,29 +1,7 @@
 <!DOCTYPE html>
 <html>
 <?php include_once ("../../helpers/helper.php")?>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <title>Teacher</title>
-    <!--  Social tags      -->
-    <meta name="keywords" content="dashboard, bootstrap 4 dashboard, bootstrap 4 design, bootstrap 4 system, bootstrap 4, bootstrap 4 uit kit, bootstrap 4 kit, argon, argon ui kit, creative tim, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit, argon dashboard">
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <!-- Favicon -->
-    <link rel="icon" href="<?php echo getPublic("images/argon/brand/favicon.png") ?>" type="image/png">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <!-- Icons -->
-    <link rel="stylesheet" href="<?php echo getAssets("plugins/argon/vendors/nucleo/css/nucleo.css") ?> "
-          type="text/css">
-    <link rel="stylesheet" href="<?php echo getAssets("plugins/font-awesome/css/font-awesome.css") ?>" type="text/css">
-    <!-- Argon CSS -->
-    <link rel="stylesheet" href="<?php echo getAssets("plugins/argon/css/argon.min.css") ?>" type="text/css">
-    <!--    Owl Carousel-->
-    <link rel="stylesheet" href="<?php echo getAssets("plugins/owl-carousel2/assets/owl.carousel.min.css")?>">
-    <link rel="stylesheet" href="<?php echo getAssets("plugins/owl-carousel2/assets/owl.theme.default.min.css")?>">
-
-</head>
+<?php include_once ("../../includes/header.php")?>
 
 <body>
 <!-- Sidenav -->
@@ -569,51 +547,12 @@
             </div>
         </div>
         <!-- Footer -->
-        <footer class="footer pt-0">
-            <div class="row align-items-center justify-content-lg-between">
-                <div class="col-lg-6">
-                    <div class="copyright text-center text-lg-left text-muted">
-                        &copy; 2018 <a href="https://www.creative-tim.com/" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/" class="nav-link" target="_blank">Creative Tim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="http://blog.creative-tim.com/" class="nav-link" target="_blank">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </footer>
+        <?php include_once ("../../includes/footer.php")?>
     </div>
 </div>
 <!-- Argon Scripts -->
 <!-- Core -->
-
-<script src="<?php echo getAssets("js/jquery.min.js") ?>"></script>
-<script src="<?php echo getAssets("plugins/bootstrap/js/bootstrap.bundle.min.js") ?>"></script>
-<script src="<?php echo getAssets("plugins/argon/vendors/js-cookie/js.cookie.js") ?>"></script>
-<script src="<?php echo getAssets("plugins/argon/vendors/jquery.scrollbar/jquery.scrollbar.min.js") ?>"></script>
-<script src="<?php echo getAssets("plugins/argon/vendors/jquery-scroll-lock/dist/jquery-scrollLock.min.js") ?>"></script>
-<script src="<?php echo getAssets("plugins/argon/vendors/lavalamp/js/jquery.lavalamp.min.js") ?>"></script>
-<!-- Charts JS -->
-<script src="<?php echo getAssets("plugins/chart.js/dist/Chart.min.js") ?>"></script>
-<script src="<?php echo getAssets("plugins/chart.js/dist/Chart.extension.js") ?>"></script>
-<!-- Argon JS -->
-<script src="<?php echo getAssets("plugins/argon/js/argon.min.js") ?>"></script>
-<!--  OWL COROUSEL-->
-
-<script src="<?php echo getAssets("plugins/owl-carousel2/owl.carousel.min.js")?>"></script>
-<script src="<?php echo getAssets("js/script.js") ?>"></script>
+<?php include_once ("../../includes/core_scripts.php")?>
 </body>
 
 
