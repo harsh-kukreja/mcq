@@ -10,7 +10,7 @@ include_once("../config/config.php");
 
 class PdoConnection
 {
-    public function connectoPdo(){
+    public function connectPdo(){
         $hostname = DB_HOST;
         $db = DB_NAME;
         $dsn = "mysql:host=$hostname;dbname=$db";
