@@ -11,7 +11,7 @@ include_once ("PdoConnection.php");
 class Crud{
     public function insertDb($table_name,$rows,$values){
         $pdoObject = new PdoConnection();
-        $pdo = $pdoObject->connectoPdo();
+        $pdo = $pdoObject->connectPdo();
         $row_values= implode(',',$rows);
         $values = implode(',',$values);
         $statement = $pdo->prepare("INSERT INTO $table_name($row_values) VALUES ($values)");
@@ -29,7 +29,7 @@ class Crud{
     }
     public function updateDb($table_name,$field,$condition=0){
         $pdoObject = new PdoConnection();
-        $pdo = $pdoObject->connectoPdo();
+        $pdo = $pdoObject->connectPdo();
         $fields= implode(',',$field);
         $statement = $pdo->prepare("UPDATE $table_name SET $fields WHERE $condition");
         // die("UPDATE $table_name SET $fields WHERE $condition");
