@@ -6,7 +6,7 @@
  * Time: 11:39 PM
  */
 define("DB_HOST", "localhost");
-define("DB_USER", "shahvrushali22");
-define("DB_PASSWORD", "vru22121999");
+define("DB_USER", "test");
+define("DB_PASSWORD", "test");
 define("DB_NAME", "mcq");
 
