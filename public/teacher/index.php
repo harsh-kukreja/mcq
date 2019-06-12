@@ -1,7 +1,7 @@
 <?php $page_title = "Teacher";
 
 
-    include_once("../../helpers/helper.php");
+    include_once("../../helpers/Helper.class.php");
     $helper = new Helper();?>
 <!DOCTYPE html>
 <html>

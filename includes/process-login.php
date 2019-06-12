@@ -41,7 +41,7 @@ if(isset($_POST['login'])){
         if(!isset($_SESSION['username'])){
             session_start();
         }
-        $_SESSION['username'] = $user_id;
+        $_SESSION['user_id'] = $user_id;
        // $_SESSION['role'] = $role;
 
         if($role_id == 1) {
