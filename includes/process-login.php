@@ -5,7 +5,8 @@
  * Date: 10-06-2019
  * Time: 19:49
  */
-
+include_once("../helpers/helper.php");
+$helper= new Helper();
 
 include_once ("../includes/PdoConnection.class.php");
 function convertToString($item){
@@ -30,7 +31,7 @@ if(isset($_POST['login'])){
 
     while($row = $statement->fetch(PDO::FETCH_ASSOC)){
 
-        $user_id = $row['username'];
+        $user_id = $row['user_id'];
         $db_password = $row['password'];
 
         $role_id = $row['role_id'];
@@ -42,7 +43,9 @@ if(isset($_POST['login'])){
         }
         $_SESSION['username'] = $user_id;
        // $_SESSION['role'] = $role;
+
         if($role_id == 1) {
+
             $statement = $connection->prepare("select * from teacher where user_id = $user_id");
             $statement->execute();
             while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
@@ -50,12 +53,13 @@ if(isset($_POST['login'])){
                 $teacher_id = $row['teacher_id'];
                 $_SESSION['teacher_id'] = $teacher_id;
 
-                header("Location: ../public/teacher/index.php");
+                header("Location: ".$helper->getPublic("teacher/index.php"));
             }
         }
 
 
         elseif ($role_id == 2){
+
             $statement = $connection->prepare("select * from student where user_id = $user_id");
             $statement->execute();
             while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
@@ -64,26 +68,29 @@ if(isset($_POST['login'])){
                 $_SESSION['student_id'] = $student_id;
 
 
-                header("Location: ../public/student/index.php");
+                header("Location: ".$helper->getPublic("student/index.php"));
             }
         }
 
         elseif ($role_id == 3){
+
             $statement = $connection->prepare("select * from parent where user_id = $user_id");
+            print_r($statement);
             $statement->execute();
+
             while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-_
+
                 $parent_id = $row['parent_id'];
                 $_SESSION['parent_id'] = $parent_id;
+                die("".header("Location: ".$helper->getPublic("parent/index.php")));
 
-
-                header("Location: ../public/parent/index.php");
+                header("Location: ".$helper->getPublic("parent/index.php"));
             }
         }
 
         elseif($role_id == 4){
             
-            header("Location: ../public/admin/index.php");
+            header("Location: ".$helper->getPublic("admin/index.php"));
         }
 
 
