@@ -1,6 +1,9 @@
     <?php
     include_once("../helpers/helper.php");
-    $helper = new Helper(); ?>
+    $helper = new Helper();
+    include_once ("../includes/process-login.php");
+    $login = new ProcessLogin();
+    ?>
 
 <?php $page_title = "MCQ-LoginPage";
 session_start();
@@ -69,7 +72,8 @@ if(isset($_SESSION['user_id'])) {
             <div class="col-lg-5 col-md-7">
                 <div class="card bg-secondary border-0 mb-0">
                     <div class="card-body px-lg-5 py-lg-5">
-                        <form role="form" action="../includes/process-login.php" method="post">
+
+                        <form role="form" action="<?php $login->processLogin()?>" method="post">
                             <div class="form-group mb-3">
                                 <div class="input-group input-group-merge input-group-alternative">
                                     <div class="input-group-prepend">
