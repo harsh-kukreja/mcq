@@ -5,16 +5,25 @@
  * Date: 10-06-2019
  * Time: 19:49
  */
-include_once ("../helpers/helper.php");
+include_once("../helpers/Helper.class.php");
 
 include_once ("../includes/PdoConnection.class.php");
-class ProcessLogin{
 
+class ProcessLogin{
+    /**
+     *This function is used for concatenating string with single quotes and returns the concatenated strings
+     * Parameter :- String to be concatenated
+     * Returns a new concatenated string
+     */
     function convertToString($item){
         $string_item  = "'" .$item. "'";
         return $string_item;
 
     }
+  /**
+   *Checking the login credentials and redirecting it to the particular page depending upon the roles assigned and checking the entered username and password.
+   *
+   */
     function processLogin(){
         $helper = new Helper();
         if(isset($_POST['login'])){
@@ -27,9 +36,9 @@ class ProcessLogin{
             $username = $this->convertToString($username);
             echo "$username";
             $statement = $connection->prepare("select * from user where username=$username");
-            // die("select * from user where username= '{$username}'");
+
             $statement->execute();
-            // $statement->execute([$username]);
+
             $db_password = "";
 
             while($row = $statement->fetch(PDO::FETCH_ASSOC)){
@@ -45,7 +54,7 @@ class ProcessLogin{
                     session_start();
                 }
                 $_SESSION['user_id'] = $user_id;
-                // $_SESSION['role'] = $role;
+                 $_SESSION['role_id'] = $role_id;
                 if($role_id == 1) {
                     $statement = $connection->prepare("select * from teacher where user_id = $user_id");
                     $statement->execute();

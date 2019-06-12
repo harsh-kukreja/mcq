@@ -4,7 +4,7 @@
 <?php
     $page_title = "Parent";
 
-include_once("../../helpers/helper.php");
+include_once("../../helpers/Helper.class.php");
 $helper = new Helper();
 include_once("../../includes/header.php");
 

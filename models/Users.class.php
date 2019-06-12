@@ -7,7 +7,7 @@
  */
 
 
-require ("../helpers/helper.php");
+require("../helpers/Helper.class.php");
 include_once ("getModels('Roles.php')");
 include_once("getModels('Person.php')");
 class Users extends Person implements Roles{

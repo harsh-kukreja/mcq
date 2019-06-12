@@ -9,6 +9,7 @@
 include_once ("PdoConnection.php");
 
 class Crud{
+
     public function insertDb($table_name,$rows,$values){
         $pdoObject = new PdoConnection();
         $pdo = $pdoObject->connectPdo();

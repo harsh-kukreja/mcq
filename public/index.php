@@ -1,7 +1,7 @@
     <?php
-    include_once("../helpers/helper.php");
+    include_once("../helpers/Helper.class.php");
     $helper = new Helper();
-    include_once ("../includes/process-login.php");
+    include_once("../includes/ProcessLogin.class.php");
     $login = new ProcessLogin();
     ?>
 
