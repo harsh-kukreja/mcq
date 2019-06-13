@@ -35,7 +35,7 @@ class ProcessLogin{
 
             $username = $this->convertToString($username);
             echo "$username";
-            $statement = $connection->prepare("select * from user where username=$username");
+            $statement = $connection->prepare("select * from user where username=$username  ");
 
             $statement->execute();
 
