@@ -79,7 +79,7 @@ if(isset($_SESSION['user_id'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="Email" type="text" name="username">
+                                    <input class="form-control" value="" placeholder="Username" type="text" name="username">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -87,7 +87,7 @@ if(isset($_SESSION['user_id'])) {
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="Password" type="password" name="password">
+                                    <input class="form-control" value="" placeholder="Password" type="password" name="password">
                                 </div>
                             </div>
 
@@ -99,7 +99,7 @@ if(isset($_SESSION['user_id'])) {
                 </div>
                 <div class="row mt-3">
                     <div class="col-6">
-                        <a href="#" class="text-light hover-pointer" style="cursor: grabbing;">
+                        <a href="#" class="text-light hover-pointer" >
                            <small>Forgot password?</small>
                         </a>
                     </div>
