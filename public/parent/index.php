@@ -7,8 +7,8 @@
 include_once("../../helpers/Helper.class.php");
 $helper = new Helper();
 include_once("../../includes/header.php");
+session_start();
 if(isset($_SESSION['role_id'])) {
-    session_start();
     if ($_SESSION['role_id'] == 3) {
 
 
@@ -398,6 +398,10 @@ if(isset($_SESSION['role_id'])) {
         </body>
         <?php
     }//END OF IF
+    else {
+        include_once("../../includes/no-access.php");
+    }
+
 }else{
     include_once ("../../includes/no-access.php");
 }
