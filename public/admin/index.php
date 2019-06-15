@@ -6,8 +6,8 @@ $page_title = "Admin";
 include_once("../../helpers/Helper.class.php");
 $helper = new Helper();
 include_once ("../../includes/header.php");
-session_start();
 if(isset($_SESSION['role_id'])) {
+    session_start();
 
 
     if ($_SESSION['role_id'] == 4) {
