@@ -7,16 +7,14 @@
 <html>
 <?php
 include_once ("../../includes/header.php");
+session_start();
 if(isset($_SESSION['role_id'])) {
-    session_start();
     if ($_SESSION['role_id'] == 1) {
-
-
         ?>
-
-
         <body>
-        <?php//Sidenav
+        <?php
+
+
         include_once("../../includes/sidenav.php"); ?>
 
         <!-- Main content -->
@@ -528,6 +526,9 @@ if(isset($_SESSION['role_id'])) {
         </body>
         <?php
     }//END OF IF
+    else{
+        include_once ("../../includes/no-access.php");
+    }
 }else{
     include_once ("../../includes/no-access.php");
 }

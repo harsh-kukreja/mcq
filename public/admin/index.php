@@ -6,16 +6,11 @@ $page_title = "Admin";
 include_once("../../helpers/Helper.class.php");
 $helper = new Helper();
 include_once ("../../includes/header.php");
+session_start();
 if(isset($_SESSION['role_id'])) {
-    session_start();
-
 
     if ($_SESSION['role_id'] == 4) {
-
-
         ?>
-
-
         <body>
         <!-- Sidenav -->
 
@@ -403,9 +398,14 @@ if(isset($_SESSION['role_id'])) {
         <?php
     }//END OF IF
 
-}else {
+    else {
+        include_once("../../includes/no-access.php");
+    }
+
+}    else {
     include_once("../../includes/no-access.php");
 }
+
 ?>
 
 </html>
