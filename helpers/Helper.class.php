@@ -19,10 +19,10 @@ class Helper{
         return $this->basePath.'assets/'.$file;
     }
 
-    public function getConfig($file=""){
-
-        return $this->basePath.'config/'.$file;
-    }
+//    public function getConfig($file=""){
+//
+//        return $this->basePath.'config/'.$file;
+//    }
 
     public function getIncludes($file=""){
 
