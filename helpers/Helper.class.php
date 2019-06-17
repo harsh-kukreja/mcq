@@ -8,7 +8,7 @@ class Helper{
     /*
      * Please give the Absolute path in the basePath variable till the folder structure
      * */
-    public $basePath = "/PHP/Projects/mcq/";
+    public $basePath = "/mcq/";
     public function getBasePath(){
 
         return  $this->basePath;
