@@ -6,7 +6,7 @@
  * Time: 5:04 PM
  */
 
-include_once ("PdoConnection.php");
+include_once ("PdoConnection.class.php");
 
 class Crud{
 
@@ -31,10 +31,17 @@ class Crud{
     public function updateDb($table_name,$field,$condition=0){
         $pdoObject = new PdoConnection();
         $pdo = $pdoObject->connectPdo();
-        $fields= implode(',',$field);
-        $statement = $pdo->prepare("UPDATE $table_name SET $fields WHERE $condition");
+        if(is_array($field)){
+            $fields= implode(',',$field);
+            $statement = $pdo->prepare("UPDATE $table_name SET $fields WHERE $condition");
+        }
+
+        $statement = $pdo->prepare("UPDATE $table_name SET $field WHERE $condition");
+
+
         // die("UPDATE $table_name SET $fields WHERE $condition");
         $stmt = $statement->execute();
+
         if($stmt){
             echo "updated sucessfullyy";
             //return true;
