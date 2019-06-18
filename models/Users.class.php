@@ -13,7 +13,9 @@ require("../helpers/Helper.class.php");
 class Users extends Person implements Roles{
     public  $user_id,$username,$password;
 
-    function createUsername(){}
+    function createUsername(){
+
+    }
     function checkFields(){}
     function  createUser(){}
     function deleteUser(){}
