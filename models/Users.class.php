@@ -8,8 +8,8 @@
 
 
 require("../helpers/Helper.class.php");
-include_once ("getModels('Roles.php')");
-include_once("getModels('Person.php')");
+//include_once ("getModels('Roles.class.php')");
+//include_once("getModels('Person.php')");
 class Users extends Person implements Roles{
     public  $user_id,$username,$password;
 
