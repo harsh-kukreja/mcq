@@ -18,6 +18,7 @@ class Crud{
         $statement = $pdo->prepare("INSERT INTO $table_name($row_values) VALUES ($values)");
         // die("INSERT INTO $table_name($row_values) VALUES ($values)");
         //  echo "INSERT INTO $table_name($row_values) VALUES ($values)";
+
         $stmt = $statement->execute();
         if($stmt) {
             echo "inserted sucessfullyy";
@@ -35,11 +36,13 @@ class Crud{
             $fields= implode(',',$field);
             $statement = $pdo->prepare("UPDATE $table_name SET $fields WHERE $condition");
         }
+        else{
+            $statement = $pdo->prepare("UPDATE $table_name SET $field WHERE $condition");
+        }
 
-        $statement = $pdo->prepare("UPDATE $table_name SET $field WHERE $condition");
 
 
-        // die("UPDATE $table_name SET $fields WHERE $condition");
+         //die("UPDATE $table_name SET $fields WHERE $condition");
         $stmt = $statement->execute();
 
         if($stmt){
