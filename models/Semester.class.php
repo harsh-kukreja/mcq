@@ -12,19 +12,6 @@ class Semester{
         $this->pdo = $this->includes();
     }
 
-    /**
-     * convertToString():
-     * Method that converts a item variable into  a string
-     * @param $item : The statement which is to converted into string
-     * @return string: The statement that has been converted into string
-     */
-
-
-    function convertToString($item){
-        $string_item  = "'" .$item. "'";
-        return $string_item;
-
-    }
 
     /**
      * includes():
@@ -36,7 +23,8 @@ class Semester{
     function includes(){
         include_once ("../helpers/helper.class.php");
         $helper = new Helper();
-        include "../includes/Crud.class.php";
+        include_once "../includes/Crud.class.php";
+        include_once "../includes/functions.php";
 //        $helper->getIncludes("Crud.class.php");
         $pdo = new Crud();
         return $pdo;
@@ -54,9 +42,11 @@ class Semester{
     function createSemester($semester_number,$last_passed_semester,$branch_id,$created_by,$updated_by){
 
         $rows = array("semester_number","last_passed_semester","branch_id","created_by","updated_by");
-        $values = array($this->convertToSTring($semester_number),$this->convertToSTring($last_passed_semester),$this->convertToSTring($branch_id),$this->convertToSTring($created_by),$this->convertToSTring($updated_by));
-
+        $values = array(convertToSTring($semester_number),convertToSTring($last_passed_semester),convertToSTring($branch_id),convertToSTring($created_by),convertToSTring($updated_by));
+    if(exists('branch','branch_id','branch_id ='.$branch_id))
         $this->pdo->insertDb("semester",$rows,$values);
+    else
+        echo "Foreign key violated";
     }
 
     /**
@@ -73,9 +63,13 @@ class Semester{
      */
     function updateSemester($semester_number,$last_passed_semester,$branch_id,$updated_by,$condition){
 
-        $field= array("semester_number = ".$this->convertToString($semester_number),"last_passed_semester = ".$this->convertToString($last_passed_semester),"branch_id = ".$this->convertToSTring($branch_id),"updated_by = ".$this->convertToSTring($updated_by));
+        $field= array("semester_number = ".convertToString($semester_number),"last_passed_semester = ".convertToString($last_passed_semester),"branch_id = ".convertToSTring($branch_id),"updated_by = ".convertToSTring($updated_by));
+        if(exists('branch','branch_id','branch_id ='.$branch_id))
+           // $this->pdo->insertDb("semester",$rows,$values);
+            $this->pdo->updateDb("semester",$field,$condition);
+        else
+            echo "Foreign key violated";
 
-        $this->pdo->updateDb("semester",$field,$condition);
 
     }
 
@@ -118,3 +112,5 @@ class Semester{
 
 
 }
+$sem = new Semester();
+$sem->createSemester(1,0,5,1,1);
