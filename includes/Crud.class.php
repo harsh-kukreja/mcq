@@ -16,7 +16,6 @@ class Crud{
         $row_values= implode(',',$rows);
         $values = implode(',',$values);
         $statement = $pdo->prepare("INSERT INTO $table_name($row_values) VALUES ($values)");
-
         // die("INSERT INTO $table_name($row_values) VALUES ($values)");
         //  echo "INSERT INTO $table_name($row_values) VALUES ($values)";
 
@@ -55,6 +54,4 @@ class Crud{
             //return false;
         }
     }
-
-
 }

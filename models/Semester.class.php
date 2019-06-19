@@ -43,10 +43,10 @@ class Semester{
 
         $rows = array("semester_number","last_passed_semester","branch_id","created_by","updated_by");
         $values = array(convertToSTring($semester_number),convertToSTring($last_passed_semester),convertToSTring($branch_id),convertToSTring($created_by),convertToSTring($updated_by));
-    if(exists('branch','branch_id','branch_id ='.$branch_id))
-        $this->pdo->insertDb("semester",$rows,$values);
-    else
-        echo "Foreign key violated";
+        if(exists('branch','branch_id','branch_id ='.$branch_id))
+            $this->pdo->insertDb("semester",$rows,$values);
+        else
+            echo "Foreign key violated";
     }
 
     /**
@@ -61,11 +61,11 @@ class Semester{
      *
      *
      */
-    function updateSemester($semester_number,$last_passed_semester,$branch_id,$updated_by,$condition){
+    function updateSemester($semester_number,$last_passed_semester,$branch_id,$created_by,$updated_by,$condition){
 
-        $field= array("semester_number = ".convertToString($semester_number),"last_passed_semester = ".convertToString($last_passed_semester),"branch_id = ".convertToSTring($branch_id),"updated_by = ".convertToSTring($updated_by));
+        $field= array("semester_number = ".convertToString($semester_number),"last_passed_semester = ".convertToString($last_passed_semester),"branch_id = ".convertToSTring($branch_id),"created_by = ".convertToString($created_by),"updated_by = ".convertToSTring($updated_by));
         if(exists('branch','branch_id','branch_id ='.$branch_id))
-           // $this->pdo->insertDb("semester",$rows,$values);
+            // $this->pdo->insertDb("semester",$rows,$values);
             $this->pdo->updateDb("semester",$field,$condition);
         else
             echo "Foreign key violated";
@@ -96,21 +96,20 @@ class Semester{
     function getBranch($semester_id)
     {
 
-        $query = "Select branch_id from semester where semester_id = $semester_id";
+        $query = "Select branch_name from branch where branch_id = (Select branch_id from semester where semester_id = $semester_id)";
         $pdoObject = new PdoConnection();
         $connection = $pdoObject->connectPdo();
         $statement = $connection->prepare($query);
         $statement->execute();
         while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
 
-            $branch_id = $row['branch_id'];
-            return $branch_id;
+            $branch_name = $row['branch_name'];
+            return $branch_name;
 
         }
 
     }
 
-
 }
-$sem = new Semester();
-$sem->createSemester(1,0,5,1,1);
+//$sem = new Semester();
+//$sem->createSemester(1,0,5,1,1);
