@@ -33,7 +33,7 @@ if(isset($_SESSION['role_id'])) {
                                 <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                                     <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                         <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Teacher</li>
+                                        <li class="breadcrumb-item active" aria-current="page"><?php $page_title; ?></li>
                                     </ol>
                                 </nav>
                             </div>
