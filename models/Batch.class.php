@@ -14,19 +14,6 @@ class Batch{
         $this->pdo = $this->includes();
     }
 
-    /**
-     * convertToString():
-     * Method that converts a item variable into  a string
-     * @param $item : The statement which is to converted into string
-     * @return string: The statement that has been converted into string
-     */
-
-
-    function convertToString($item){
-        $string_item  = "'" .$item. "'";
-        return $string_item;
-
-    }
 
     /**
      * includes():
@@ -38,6 +25,7 @@ class Batch{
     function includes(){
         include_once ("../helpers/helper.class.php");
         include "../includes/Crud.class.php";
+        include_once "../includes/functions.php";
         $pdo = new Crud();
         return $pdo;
     }
@@ -55,7 +43,7 @@ class Batch{
 
     function createBatch($division_id,$batch_name,$created_by,$updated_by,$deleted=0,$additional_description="null"){
         $rows = array("division_id","batch_name","created_by","updated_by","deleted","additional_description");
-        $values = array($this->convertToSTring($division_id),$this->convertToSTring($batch_name),$this->convertToSTring($created_by),$this->convertToSTring($updated_by),$deleted,$additional_description);
+        $values = array(convertToSTring($division_id),convertToSTring($batch_name),convertToSTring($created_by),convertToSTring($updated_by),$deleted,$additional_description);
 
         $this->pdo->insertDb("batch",$rows,$values);
 
@@ -72,7 +60,7 @@ class Batch{
      */
     function updateBatch($division_id,$batch_name,$created_by,$updated_by,$condition,$additional_description="null"){
 
-        $field= array("division_id = ".$this->convertToString($division_id),"batch_name = ".$this->convertToString($batch_name),"created_by = ".$this->convertToSTring($created_by),"updated_by = ".$this->convertToSTring($updated_by),"additional_description = ".$additional_description);
+        $field= array("division_id = ".convertToString($division_id),"batch_name = ".convertToString($batch_name),"created_by = ".convertToSTring($created_by),"updated_by = ".convertToSTring($updated_by),"additional_description = ".$additional_description);
 
         $this->pdo->updateDb("batch",$field,$condition);
 
@@ -94,7 +82,7 @@ class Batch{
      * getDivision("21");
      */
     function getDivision($batch_id){
-        $query = "Select division_id from batch where batch_id = $batch_id";
+        $query = "SELECT division_id FROM batch WHERE batch_id = $batch_id";
         $pdoObject = new PdoConnection();
         $connection = $pdoObject->connectPdo();
         $statement = $connection->prepare($query);
