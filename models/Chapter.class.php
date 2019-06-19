@@ -139,6 +139,6 @@ class Chapter
 /**
  * Example of violating foreign key
  */
-$chap = new Chapter();
-$chap->createChapter(21,'algebra','1',1);
+//$chap = new Chapter();
+//$chap->createChapter(21,'algebra','1',1);
 
