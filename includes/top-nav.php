@@ -1,5 +1,5 @@
 <?php
-include_once ("../../models/Person.class.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/mcq/models/Person.class.php");
 
 $personObj = new Person();
 $name =  $personObj->getName();
@@ -171,7 +171,7 @@ $name =  $personObj->getName();
                         <div class="dropdown-header noti-title">
                             <h6 class="text-overflow m-0">Welcome!</h6>
                         </div>
-                        <a href="#!" class="dropdown-item">
+                        <a href="<?php echo $helper->getPages("profile.php")?>" class="dropdown-item">
                             <i class="ni ni-single-02"></i>
                             <span>My profile</span>
                         </a>
