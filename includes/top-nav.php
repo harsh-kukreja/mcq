@@ -1,3 +1,9 @@
+<?php
+include_once ("../../models/Person.class.php");
+
+$personObj = new Person();
+$name =  $personObj->getName();
+?>
 <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -66,7 +72,7 @@
                                     <div class="col ml--2">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
-                                                <h4 class="mb-0 text-sm">John Snow</h4>
+                                                <h4 class="mb-0 text-sm">John snow</h4>
                                             </div>
                                             <div class="text-right text-muted">
                                                 <small>3 hrs ago</small>
@@ -157,7 +163,7 @@
                          src="<?php echo $helper->getPublic("images/argon/theme/team-4.jpg") ?>">
                   </span>
                             <div class="media-body ml-2 d-none d-lg-block">
-                                <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
+                                <span class="mb-0 text-sm  font-weight-bold"><?php echo $name; ?></span>
                             </div>
                         </div>
                     </a>
