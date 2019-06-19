@@ -33,5 +33,13 @@ class Person
        }
         return $name;
     }
+    function getDetails(){
+        $pdo= $this->includes();
+       // session_start();
+        $stmt = "SELECT email,contact,first_name,last_name,about_me,address FROM person WHERE person.person_id =( SELECT user.user_id FROM user WHERE user.user_id = {$_SESSION['user_id']})";
+        $statement = $pdo->query($stmt);
+         $statement->execute();
+         return $statement->fetch(PDO::FETCH_ASSOC);
+    }
 
 }
