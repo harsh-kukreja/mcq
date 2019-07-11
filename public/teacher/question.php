@@ -37,10 +37,10 @@ if(isset($_SESSION['role_id'])) {
                 $source="";
             }
             switch ($source){
-                case "add_post":
+                case "add_question":
                     include_once ("pages/question/add-question.php");
                     break;
-                case "edit_post":
+                case "edit_question":
                     include_once ("pages/question/edit-question.php");
                     break;
 //                case "delete_post":

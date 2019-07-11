@@ -13,4 +13,10 @@
 <!--  OWL COROUSEL-->
 
 <script src="<?php echo $helper->getAssets("plugins/owl-carousel2/owl.carousel.min.js")?>"></script>
+
+<!--TINYMCE-->
+<script src="<?php echo $helper->getAssets("plugins/tinymce/tinymce.min.js")?>"></script>
+
+
+<!--OUR SCRIPTS-->
 <script src="<?php echo $helper->getAssets("js/script.js") ?>"></script>

@@ -1,6 +1,6 @@
 <div class="row py-4">
     <div class="col-md-12">
-        <a href="questions.php?source=add_question" class="btn btn-primary">Add Question</a>
+        <a href="question.php?source=add_question" class="btn btn-primary">Add Question</a>
     </div>
 </div>
 
