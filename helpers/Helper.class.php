@@ -11,7 +11,7 @@ class Helper{
     public $basePath = "/mcq/";
     public function getBasePath(){
 
-        return  $this->basePath;
+        return  $_SERVER["DOCUMENT_ROOT"].$this->basePath;
 
     }
     public function getAssets($file=""){
