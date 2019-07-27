@@ -8,7 +8,7 @@ $(document).ready(function(){
     });
 
     // var path = <?php echo Hii?>;
-    alert(tinyMCE.documentBaseURL);
+    // alert(tinyMCE.documentBaseURL);
     tinymce.init({
         selector: 'textarea',
         skin: 'lightgray',
