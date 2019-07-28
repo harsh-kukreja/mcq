@@ -5,10 +5,6 @@
 </div>
 
 
-<?php
-
-	    
-?>
 
 <div class="row">
     <div class="col-md-12">
@@ -25,9 +21,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php
-                
-                ?>
                 </tbody>
             </table>
         </div>

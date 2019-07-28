@@ -5,8 +5,9 @@
  * Date: 6/9/2019
  * Time: 4:38 PM
  */
-include_once("../config/config.php");
 
+
+include_once ("config.php");
 
 class PdoConnection
 {

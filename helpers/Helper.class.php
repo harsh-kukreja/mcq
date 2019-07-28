@@ -11,7 +11,7 @@ class Helper{
     public $basePath = "/mcq/";
     public function getBasePath(){
 
-        return  $this->basePath;
+        return  $_SERVER["DOCUMENT_ROOT"].$this->basePath ;
 
     }
     public function getAssets($file=""){
@@ -19,10 +19,10 @@ class Helper{
         return $this->basePath.'assets/'.$file;
     }
 
-    public function getConfig($file=""){
-
-        return $this->basePath.'config/'.$file;
-    }
+//    public function getConfig($file=""){
+//
+//        return $this->basePath.'config/'.$file;
+//    }
 
     public function getIncludes($file=""){
 

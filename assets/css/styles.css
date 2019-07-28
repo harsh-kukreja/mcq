@@ -25,3 +25,10 @@ html,body{
 .error-actions .btn {
     margin-right: 10px;
 }
+textarea{
+    resize: none;
+}
+
+.font-size-18{
+    font-size: 18px;
+}
