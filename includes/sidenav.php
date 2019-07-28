@@ -39,67 +39,9 @@
                         
                         <?php
 	
-							/********************************************
-							 * CODE TO CREATE SIDENAV STRUCTURE WITH
-                             * SUBJECTS AND THE DIFFERENT BATCHES THAT
-                             * THE LOGGED IN TEACHER.
-							 *********************************************/
-	
-							/**
-							 * COMMENTS:
-                             *
-                             * In the below code I have retrieved all the subjects that the logged in teacher teaches along with the different batches of that subject that the teacher teaches.
-                             *
-							 */
-							
-							$query = "SELECT teaches.subject_id, subject.subject_name, teaches.division_id, division.division_name, teaches.batch_id, batch.batch_name
-FROM subject, teaches, division, batch
-WHERE teaches.subject_id = subject.subject_id
-AND teaches.division_id = division.division_id
-AND teaches.batch_id = batch.batch_id
-AND teaches.teacher_id = (SELECT teacher.teacher_id FROM teacher WHERE teacher.user_id = " . $_SESSION['user_id'] . ")";
-	
-							include_once ($helper->getBasePath()."includes/PdoConnection.class.php");
-							$pdoconn = new PdoConnection();
-							$pdo = $pdoconn->connectPdo();
-							$rs = $pdo->query($query);
-	
-							$subjects = array();
-							$prev_id = 0;
-	                        include_once ($helper->getBasePath()."/models/Group.class.php");
-							while($row = $rs->fetch(PDO::FETCH_ASSOC)) {
-								if($row['subject_id'] === $prev_id) {
-								    
-								    //CODE TO APPEND DIVISION AND BATCH IN THE EXISTING SUBJECT_ID AND SUBJECT_NAME IN THE ARRAY.
-								    
-                                    /*$subjects[$prev_id]["divisions"][$row['division_id']] = $row['division_name'];
-									$subjects[$prev_id]["batches"][$row['batch_id']] = $row['batch_name'];*/
-									array_push($subjects[$row['subject_id']]["classes"], new Group($row['division_id'], $row['division_name'], $row['batch_id'], $row['batch_name']));
-								} else {
-								    
-								    //CODE TO CREATE NEW ROW OF SUBJECT_ID AND SUBJECT_NAME IN THE ARRAY AND ADD THE DIVISION AND BATCH OF THAT ROW IN THE ARRAY.
-            
-								    $subjects[$row['subject_id']] = array("subject" => $row['subject_name'], "classes" => array());
-								    array_push($subjects[$row['subject_id']]["classes"], new Group($row['division_id'], $row['division_name'], $row['batch_id'], $row['batch_name']));
-									
-									$prev_id = $row["subject_id"];
-                                }
-							}
-							
-							/**
-							 * SYNTAX:
-                             *
-                             * ARRAY (
-                             *      [subject_id] =>
-                             *      ARRAY (
-                                        "subject" => {subject_name}
-                             *          "classes" => Array(
-                                            [0] => Group Object()
-                             *              [1] => Group Object()
-                             *          )
-                             *      )
-                             * )
-							 * */
+							include_once ($helper->getBasePath() . "models/Teacher.class.php");
+							$teacher = new Teacher($_SESSION['user_id']);
+							$subjects = $teacher->getSubjectsAndBatches();
 							
 							foreach ($subjects as $subject_id => $subject) {
 							    echo<<<SUBJECT
@@ -129,7 +71,7 @@ SUBJECT;
                             <div class="collapse" id="navbar-{$subject["subject"]}-{$current_group->getDivision()}-{$current_group->getBatch()}">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">Create Test</a>
+                                        <a href="test.php?subject_id={$subject_id}&batch_id={$current_group->getBatchId()}" class="nav-link">Create Test</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">Reports</a>
@@ -145,7 +87,7 @@ BATCH;
                                         <a href="question.php?source=add_question&subject_id={$subject_id}" class="nav-link">Add Question</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="question.php" class="nav-link">View All Question</a>
+                                        <a href="question.php?subject_id={$subject_id}" class="nav-link">View All Question</a>
                                     </li>
 </ul>
 </div>
@@ -158,32 +100,6 @@ LINK;
                         
 
 
-                        <!--<li class="nav-item">
-                            <a class="nav-link" href="#navbar-COA" data-toggle="collapse" role="button"
-                               aria-expanded="false" aria-controls="navbar-COA">
-                                <i class="ni ni-ui-04 text-info"></i>
-                                <span class="nav-link-text">COA</span>
-                            </a>
-                            <div class="collapse" id="navbar-COA">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">Create Test</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">Reports</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">Add Question</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">View All Question</a>
-                                    </li>
-
-
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>-->
                     <?php
                 }else if($_SESSION['role_id']==2) {
 
