@@ -42,7 +42,6 @@ ORDER BY chapter.chapter_id";*/
                         <th>Options</th>
                         <th>Correct option</th>
                         <th></th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -76,8 +75,7 @@ TABLE;
                             }
                             
                             echo <<<BUTTONS
-    <td></td>
-    <td></td>
+    <td><a href="question.php?source=edit_question&question_id={$array_keys[$i]}" class="btn btn-primary" role="button"><span class="fa fa-edit"></span></a></td>
 </tr>\n
 BUTTONS;
 
