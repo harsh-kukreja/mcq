@@ -28,7 +28,7 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="pages/student_details.php">
                                 <i class="ni ni-archive-2 text-green"></i>
                                 <span class="nav-link-text">Student Details</span>
                             </a>
