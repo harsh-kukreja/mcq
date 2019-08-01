@@ -7,23 +7,22 @@
  */
 
 $page_title = "Student Details";
- include_once("../../../helpers/Helper.class.php");
-// include_once ("");
-
-    $helper = new Helper();?>
+ include_once($_SERVER["DOCUMENT_ROOT"]."/mcq/helpers/Helper.class.php");
+    $helper = new Helper();
+    ?>
 <!DOCTYPE html>
 <html>
 <?php
+
 include_once ($helper->getBasePath()."includes/header.php");
-$helper = new Helper();
 session_start();
 if(isset($_SESSION['role_id'])) {
     if ($_SESSION['role_id'] == 1) {
         ?>
+
         <body>
         <?php
-        include_once($helper->getBasePath()."includes/sidenav.php");?>
-
+        include_once($helper->getBasePath()."/includes/sidenav.php");?>
         <!-- Main content -->
         <div class="main-content" id="panel">
             <!-- Topnav -->
@@ -74,7 +73,7 @@ if(isset($_SESSION['role_id'])) {
         $statement->execute();
         $persons = $statement->fetchAll(\PDO::FETCH_ASSOC);
         for($i = 0;$i<sizeof($persons);$i++) {
-            $query = "select first_name,last_name,address,email,contact,image from person where person_id  = " . $persons[$i]['person_id'];
+            $query = "select first_name,last_name,address,email,contact,image from person where deleted = 0 and  person_id  = " . $persons[$i]['person_id'];
                 $pdoObject = new PdoConnection();
                 $connection = $pdoObject->connectPdo();
                 $statement = $connection->prepare($query);
@@ -90,7 +89,7 @@ if(isset($_SESSION['role_id'])) {
                     echo <<<DETAILS
 <tr>
 <td>$j</td>
-<td><img src="../../images/$image" class="img-fluid"></td>
+<td><img src = "{$helper->getBasePath('mcq/public/images/$image')}" class="img-fluid"></td>
 <td>$first_name $last_name</td>
 <td>$address</td>
 <td>$email</td>
@@ -101,8 +100,6 @@ if(isset($_SESSION['role_id'])) {
 DETAILS;
                 }
             }
-
-        return null;
 
 
         ?>
