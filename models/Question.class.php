@@ -6,8 +6,7 @@
  * Time:
  */
 
-include "../helpers/Helper.class.php";
-include "../includes/PdoConnection.class.php";
+include_once $helper->getBasePath() . "includes/PdoConnection.class.php";
 
 class Question{
     public $question_id,$difficulty_level,$marks,$question,$option_correct_answer;
@@ -37,6 +36,9 @@ WHERE chapter.subject_id = {$subject_id}";
         if ($random == true)
             $query .= "
             ORDER BY RAND()";
+        else
+	        $query .= "
+            ORDER BY chapter.chapter_id()";
         
     
         $pdoconn = new PdoConnection();
@@ -100,7 +102,10 @@ WHERE option.question_id = question.question_id AND chapter.subject_id = {$subje
         if ($random == true)
             $query .= "
             ORDER BY RAND()";
-    
+        else
+	        $query .= "
+            ORDER BY chapter.chapter_id";
+        
         $pdoconn = new PdoConnection();
         $pdo = $pdoconn->connectPdo();
         $rs = $pdo->query($query);
@@ -187,6 +192,11 @@ WHERE question.question_id = option.question_id AND question.chapter_id = {$chap
 	
 		return $questions;
 	}
+	
+	
+	function getAllCorrectOptions($subject_id) {
+ 
+	}
 }
 
 class Options{
@@ -199,7 +209,7 @@ class Options{
 /*
 
 For Testing:
-*/
+
 $testobj = new Question();
 print_r($testobj->getAllQuestionsAndOptionsFromChapter(39, false));
 

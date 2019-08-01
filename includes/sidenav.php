@@ -22,7 +22,10 @@
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <?php
 
-                if ($_SESSION['role_id']==1) { ?>
+                if ($_SESSION['role_id']==1) {
+                    
+                    
+                    ?>
                     <!-- Teacher Nav items -->
                     <ul class="navbar-nav">
 
@@ -34,60 +37,70 @@
                                 <span class="nav-link-text">Student Details</span>
                             </a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#navbar-AOA" data-toggle="collapse" role="button"
-                               aria-expanded="false" aria-controls="navbar-AOA">
-                                <i class="ni ni-ungroup text-orange"></i>
-                                <span class="nav-link-text">AOA</span>
-                            </a>
-                            <div class="collapse" id="navbar-AOA">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">Create Test</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">Reports</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">Add Question</a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">View All Question</a>
-                                    </li>
-
-                                </ul>
-                            </div>
-                        </li>
-
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#navbar-COA" data-toggle="collapse" role="button"
-                               aria-expanded="false" aria-controls="navbar-COA">
+                        
+                        <?php
+	
+							include_once ($helper->getBasePath() . "models/Teacher.class.php");
+							$teacher = new Teacher($_SESSION['user_id']);
+							$subjects = $teacher->getSubjectsAndBatches();
+							
+							foreach ($subjects as $subject_id => $subject) {
+							    echo<<<SUBJECT
+<li class="nav-item">
+                            <a class="nav-link" href="#navbar-{$subject["subject"]}" data-toggle="collapse" role="button"
+                               aria-expanded="false" aria-controls="navbar-{$subject["subject"]}">
                                 <i class="ni ni-ui-04 text-info"></i>
-                                <span class="nav-link-text">COA</span>
+                                <span class="nav-link-text">{$subject["subject"]}</span>
                             </a>
-                            <div class="collapse" id="navbar-COA">
+                            <div class="collapse" id="navbar-{$subject["subject"]}">
+                                <ul class="nav nav-sm flex-column">
+SUBJECT;
+
+							    
+							    
+								$arrays_size = sizeof($subject["classes"]);
+							    for ($i = 0; $i<$arrays_size; $i++) {
+							        $current_group = $subject["classes"][$i];
+							        
+							        echo <<<BATCH
+<li class="nav-item">
+                            <a class="nav-link" href="#navbar-{$subject["subject"]}-{$current_group->getDivision()}-{$current_group->getBatch()}" data-toggle="collapse" role="button"
+                               aria-expanded="false" aria-controls="navbar-{$subject["subject"]}-{$current_group->getDivision()}-{$current_group->getBatch()}">
+                                <i class="ni ni-ui-04 text-info"></i>
+                                <span class="nav-link-text">{$current_group->getDivision()}-{$current_group->getBatch()}</span>
+                            </a>
+                            <div class="collapse" id="navbar-{$subject["subject"]}-{$current_group->getDivision()}-{$current_group->getBatch()}">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="#" class="nav-link">Create Test</a>
+                                        <a href="test.php?subject_id={$subject_id}&batch_id={$current_group->getBatchId()}" class="nav-link">Create Test</a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="#" class="nav-link">Reports</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">Add Question</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">View All Question</a>
-                                    </li>
-
-
                                 </ul>
                             </div>
                         </li>
-                    </ul>
+BATCH;
+
+                                }
+							    echo <<<LINK
+<li class="nav-item">
+                                        <a href="question.php?source=add_question&subject_id={$subject_id}" class="nav-link">Add Question</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="question.php?subject_id={$subject_id}" class="nav-link">View All Question</a>
+                                    </li>
+</ul>
+</div>
+</li>
+LINK;
+
+                            }
+							
+                        ?>
+                        
+
+
                     <?php
                 }else if($_SESSION['role_id']==2) {
 
