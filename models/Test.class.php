@@ -6,7 +6,10 @@
  * Time:
  */
 
+
 class Test{
 
 
 }
+
+?>

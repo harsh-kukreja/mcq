@@ -6,7 +6,7 @@
  * Time: 5:04 PM
  */
 
-include_once ("PdoConnection.class.php");
+include_once ($_SERVER["DOCUMENT_ROOT"]."/mcq/includes/PdoConnection.class.php");
 
 class Crud{
 
@@ -53,5 +53,21 @@ class Crud{
             echo "not updated";
             //return false;
         }
+    }
+
+
+    /**
+     * @param $query
+     * @return array
+     *
+     * This function will take a query string and will return an array of the result Fetched made this just to execute the query so that we dont have to create an pdoObject again and again.This uses FetchAll
+     */
+    public function executeQuery($query){
+        $pdoObject = new PdoConnection();
+        $pdo = $pdoObject->connectPdo();
+        $statement = $pdo->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+
     }
 }
