@@ -102,9 +102,6 @@ WHERE option.question_id = question.question_id AND chapter.subject_id = {$subje
         if ($random == true)
             $query .= "
             ORDER BY RAND()";
-        else
-	        $query .= "
-            ORDER BY chapter.chapter_id";
         
         $pdoconn = new PdoConnection();
         $pdo = $pdoconn->connectPdo();
@@ -123,8 +120,8 @@ WHERE option.question_id = question.question_id AND chapter.subject_id = {$subje
                 $prev_id = $row["question_id"];
             }
         }
-        
-        return $questions;
+//	    print_r($questions);
+	    return $questions;
     }
     
     
@@ -195,7 +192,21 @@ WHERE question.question_id = option.question_id AND question.chapter_id = {$chap
 	
 	
 	function getAllCorrectOptions($subject_id) {
- 
+        $query = "SELECT question.question_id, option_correct_answer.option_id as correct_option_id, option.option as correct_option
+FROM question
+INNER JOIN option_correct_answer
+ON question.question_id = option_correct_answer.question_id
+INNER JOIN option
+ON option.option_id = option_correct_answer.option_id
+INNER JOIN chapter
+ON chapter.chapter_id = question.chapter_id
+WHERE option.question_id = question.question_id AND chapter.subject_id = {$subject_id}";
+		
+		$pdoconn = new PdoConnection();
+		$pdo = $pdoconn->connectPdo();
+		$rs = $pdo->query($query);
+
+		return $rs->fetchAll();
 	}
 }
 
@@ -211,6 +222,6 @@ class Options{
 For Testing:
 
 $testobj = new Question();
-print_r($testobj->getAllQuestionsAndOptionsFromChapter(39, false));
+print_r($testobj->getAllQuestionsAndOptions(20, false));
 
 //*/
