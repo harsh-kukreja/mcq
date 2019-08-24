@@ -2,8 +2,9 @@
 include_once ($_SERVER['DOCUMENT_ROOT']."/mcq/models/Person.class.php");
 include_once ($_SERVER['DOCUMENT_ROOT']."/mcq/models/Users.class.php");
 include_once ($_SERVER['DOCUMENT_ROOT']."/mcq/includes/PdoConnection.class.php");
-//include_once ($_SERVER['DOCUMENT_ROOT']."/mcq/helpers/");
-include_once("../helpers/Helper.class.php");
+include_once ($_SERVER['DOCUMENT_ROOT']."/mcq/helpers/Helper.class.php");
+
+//include_once("../helpers/Helper.class.php");
 $helper = new Helper();
 session_start();
 $obj = new Person();
