@@ -42,6 +42,10 @@ if(isset($_SESSION['role_id'])) {
                  * */
                 if($_GET["source"] === "display_test" )
                 include_once ("pages/test/display_test.php");
+                if ($_GET["source"] === "test_details")
+                    include_once ("pages/test/test_details.php");
+            }else{
+                echo "Some issue";
             }
 
             ?>
@@ -65,5 +69,6 @@ if(isset($_SESSION['role_id'])) {
     include_once ($helper->getBasePath()."includes/no-access.php");
 }
 ?>
+
 
 </html>

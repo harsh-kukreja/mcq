@@ -7,10 +7,6 @@
  */
 
 
-if(isset($_POST["submit"])){
-
-}
-
 include_once ($helper->getBasePath()."includes/Crud.class.php");
 
 $crud= new Crud();
@@ -40,29 +36,30 @@ $rowForChapter=$crud->executeQuery($queryForChapterName);
 <div class="container mt-1">
 
     <form action="<?php echo $helper->getPublic("teacher/test.php?source=display_test")?>" method="post">
+        <input type="hidden" value="<?php echo $_GET["subject_id"]?>" name="subjectId">
 <!--        Things to be passed is subject chapterName Chapter Id, SemesterId,SemesterName,BranchId BranchName ,BatchId,BatchName-->
-        <div class="form-group form-row">
-            <div class="col-6">
+        <div class=" form-row">
+            <div class="form-group col-6">
                 <label for="semester" class="form-control-label">Semester</label>
                 <input type="hidden" value="<?php echo $rowForSemester[0]["semester_id"] ;?>">
                 <input type="text" disabled value="<?php echo $rowForSemester[0]["semester_number"] ;
 ?>" class="form-control" name="semester" >
             </div>
 
-            <div class="col-6">
+            <div class="form-group col-6">
                 <label for="branch" class="form-control-label">Branch</label>
                 <input type="hidden" value="<?php echo $rowForBranch[0]["branch_id"] ;?>">
                 <input type="text" disabled value="<?php echo $rowForBranch[0]["branch_name"] ;?>" class="form-control" name="branch">
             </div>
         </div>
-        <div class="form-group form-row">
-            <div class="col-6">
+        <div class=" form-row">
+            <div class="form-group col-6">
                 <label for="batch" class="form-control-label">Batch</label>
                 <input type="hidden" value="<?php echo $rowForBatch[0]["batch_id"] ;?>">
                 <input type="text" disabled value="<?php echo $rowForBatch[0]["batch_name"] ;?>" class="form-control" name="batch" >
             </div>
 
-            <div class="col-6">
+            <div class="form-group col-6">
                 <label for="marks" class="form-control-label">Enter Test Marks</label>
                 <input type="tel" class="form-control" name="marks" placeholder="Enter test marks" >
 
@@ -71,14 +68,24 @@ $rowForChapter=$crud->executeQuery($queryForChapterName);
         </div>
 
 
-        <div class="form-group form-row">
-            <div class="col-6">
+        <div class=" form-row">
+            <div class="form-group col-6">
                 <label for="type" class="form-control-label">Type</label>
 
                 <select class="form-control " name="type">
                     <option disabled selected="true">Default select</option>
                     <option value="generate"> Generate Test</option>
                     <option value="auto-generate">Auto Generate</option>
+                </select>
+            </div>
+            <div class="form-group col-6">
+                <label for="difficulty_level" class="form-control-label">Type</label>
+
+                <select class="form-control " name="difficulty_level">
+                    <option disabled selected="true">Default select</option>
+                    <option value="1">Easy</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Hard</option>
                 </select>
             </div>
 
@@ -110,7 +117,7 @@ CHAPTER;
         ?>
 
 
-        <button class="btn btn-primary mb-6" type="submit" name="submit">Done</button>
+        <button class="btn btn-primary mb-6" type="submit" name="submit-test">Done</button>
 
 
     </form>
