@@ -189,7 +189,50 @@ WHERE question.question_id = option.question_id AND question.chapter_id = {$chap
 	
 		return $questions;
 	}
-	
+
+	/**
+	 *  getAllQuestionDetailsAndOptionsFromChapter():
+	 * Method that returns all questions detail  along with their options of all chapters of a given chapter_id.
+	 *
+	 * @param $chapter_id : Given chapter_id.
+	 * @param bool $random : Boolean default variable to indicate whether questions are required randomly or not.
+	 * @return array : A 3-Dimensional Array that contains question_id, question text and all its option_id and their corresponding options.
+     *
+     * Eg: getAllQuestionDetailsAndOptionsFromChapter("39,40");
+     * To get multiple chapters details
+	 *
+	 * */
+
+    function getAllQuestionDetailsAndOptionsFromChapter($chapter_id,$difficult_level , $random = false) {
+        $query = "SELECT question.question_id, question.question, option.option_id, option.option, question.difficulty_level,question.marks FROM question, option
+WHERE question.question_id = option.question_id  AND question.chapter_id IN  ({$chapter_id})  AND question.difficulty_level <={$difficult_level}
+ORDER BY question.difficulty_level  DESC";
+
+        if ($random == true)
+            $query .= "
+            ORDER BY RAND()";
+
+        $pdoconn = new PdoConnection();
+        $pdo = $pdoconn->connectPdo();
+        $rs = $pdo->query($query);
+
+        $questions = array();
+        $prev_id = 0;
+
+        while($row = $rs->fetch(PDO::FETCH_ASSOC)) {
+            if ($row['question_id'] === $prev_id) {
+                //If the entry is of the same question but has a different option.
+                $questions[$prev_id]["options"][$row["option_id"]] = $row["option"];
+            } else {
+                //If the entry marks the start of the options of a new question.
+                $questions[$row["question_id"]] = array("question" => $row["question"], "options" => array($row["option_id"] => $row["option"]),"marks" => $row["marks"], "difficulty_level" => $row["difficulty_level"]);
+                $prev_id = $row["question_id"];
+            }
+        }
+
+
+        return $questions;
+    }
 	
 	function getAllCorrectOptions($subject_id) {
         $query = "SELECT question.question_id, option_correct_answer.option_id as correct_option_id, option.option as correct_option
@@ -217,11 +260,7 @@ class Options{
 
 }
 
-/*
 
-For Testing:
 
-$testobj = new Question();
-print_r($testobj->getAllQuestionsAndOptions(20, false));
 
 //*/
