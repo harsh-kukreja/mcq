@@ -95,7 +95,7 @@ $count = 0;
 //         print_r($chapter_id[1]);
 ?>
 <div class="container">
-    <form action="test.php?source=test_details" method="post">
+    <form action="test.php?source=test_details" method="post" id="myForm">
 
         <div class="table-responsive py-4">
             <table class="table table-flush" id="table_id" class="display">
@@ -113,19 +113,20 @@ $count = 0;
                 <?php
                 for ($i = 0; $i < sizeof($chapter_id); $i++) {
                     $question = $questionObject->getAllQuestionsFromChapter("$chapter_id[$i]");
-
+//                    print_r($question);
                     $array_keys = array_keys($question);
 
 
                     for ($j = 0; $j < sizeof($array_keys); $j++) {
                         $count++;
+
                         echo <<<CHAPTER
 <tr>
 <td>$count </td>
 <td>{$question[$array_keys[$j]]['question']}</td>
 <td>{$question[$array_keys[$j]]['marks']}</td>
 <td>{$question[$array_keys[$j]]['difficulty_level']}</td>
-<td> <input type="checkbox" name="chapterCheckbox[]" value="{$question[$array_keys[$j]]["question"]}" ></td>
+<td> <input type="checkbox" name="chapterCheckbox[]" value="{$array_keys[$j]}" ></td>
 </tr>
 CHAPTER;
 
@@ -143,4 +144,14 @@ CHAPTER;
         <div class="mb-5 text-center"> marks : <?php echo $_POST['marks']?></div>
     </form>
 </div>
-
+<script src="../../assets/js/jquery.min.js"></script>
+<script>
+    $(':checkbox').change(function () {
+        alert("ji");
+        if ($(this).is(':checked')) {
+            console.log($(this).val() + ' is now checked');
+        } else {
+            console.log($(this).val() + ' is now unchecked');
+        }
+    });
+</script>
