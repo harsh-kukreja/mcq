@@ -12,9 +12,12 @@ if (isset($_POST["submit-test"])) {
         $questionIdArray = array();
         //print_r($_POST["chapterCheckbox"]);
         $chapter_id = implode(",", $_POST["chapterCheckbox"]);
+
         if ($_POST["type"] === "auto-generate") {
-            $question = $questionObject->getAllQuestionDetailsAndOptionsFromChapter("{$chapter_id}","{$_POST["difficulty_level"]}" );
-             print_r($question);
+
+            $question = $questionObject->getAllQuestionDetailsAndOptionsFromChapter("{$chapter_id}", "{$_POST["difficulty_level"]}");
+            print_r($question);
+
             ?>
             <div class="container">
                 <form action="test.php?source=test_details" method="post">
@@ -37,11 +40,11 @@ if (isset($_POST["submit-test"])) {
                             for ($i = 0; $i < $array_size && $marks >= $initialMarks; $i++) {
                                 if (($question[$array_keys[$i]]['marks'] + $initialMarks) <= $marks) {
                                     $count++;
-                                    array_push($questionIdArray,$array_keys[$i]);
+                                    array_push($questionIdArray, $array_keys[$i]);
                                     echo <<<TABLE
                         <tr id="row-{$array_keys[$i]}">
                              <td>$count</td>
-                             <td>{$question[$array_keys[$i]]['question'] }  </td>
+                             <td>{$question[$array_keys[$i]]['question']}  </td>
                              <td>{$question[$array_keys[$i]]['marks']}</td>
                              <td>{$question[$array_keys[$i]]['difficulty_level']}</td>
                              
@@ -55,26 +58,27 @@ TABLE;
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-center"><p class="font-weight-bold">Total marks are: <?php echo $initialMarks ."/". $_POST["marks"]?></p></div>
+                    <div class="text-center"><p class="font-weight-bold">Total marks
+                            are: <?php echo $initialMarks . "/" . $_POST["marks"] ?></p></div>
                     <input type="hidden" value="<?php echo $_POST["marks"] ?>" name="marks">
                     <?php
-                        foreach ($questionIdArray as $value){
-                            echo<<<QUESTION
+                    foreach ($questionIdArray as $value) {
+                        echo <<<QUESTION
                          <input type="hidden" value="{$value}" name="questionId[]" >
 
 QUESTION;
-                        }
-                        print_r($_POST["chapterCheckbox"]);
-                        for($i=0;$i<sizeof($_POST["chapterCheckbox"]);$i++){
-                            echo<<<CHAPTER
+                    }
+                    print_r($_POST["chapterCheckbox"]);
+                    for ($i = 0; $i < sizeof($_POST["chapterCheckbox"]); $i++) {
+                        echo <<<CHAPTER
                          <input type="text" value="{$_POST['chapterCheckbox'][$i]}" name="chapterCheckbox[]">
 CHAPTER;
 
-                        }
+                    }
                     ?>
 
 
-                    <input type="hidden" value="<?php echo $_POST["subjectId"]?>" name="subjectId">
+                    <input type="hidden" value="<?php echo $_POST["subjectId"] ?>" name="subjectId">
                     <div class="form-group col-6 offset-3 ">
                         <input type="submit" name="submit" class="form-control btn btn-primary ">
                     </div>
@@ -85,8 +89,44 @@ CHAPTER;
             <?php
         }//END of chapterCheckbox if
 
-    }//End of submit-test if
-}//end of auto-generate test
+        else {
+            $chapter_id = $_POST["chapterCheckbox"];
+            $question = "";
+            $count = 0;
+            //         print_r($chapter_id[1]);
+            for ($i = 0; $i < sizeof($chapter_id); $i++) {
+                $question = $questionObject->getAllQuestionsFromChapter("$chapter_id[$i]");
+
+                $array_keys = array_keys($question);
+
+
+
+             for ($j = 0; $j < sizeof($array_keys); $j++) {
+                 $count++;
+                    echo <<<CHAPTER
+
+                <div class="input-group mt-3 mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Question {$count}</span>
+            </div>
+            <input type="text"  class="form-control " name="chapter" value="{$question[$array_keys[$j]]['question']} - marks : {$question[$array_keys[$j]]['marks']} - difficulty level - {$question[$array_keys[$j]]['difficulty_level']} " disabled >
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <input type="checkbox" name="chapterCheckbox[]" value="{$question[$array_keys[$j]]["question"]}">
+
+                </div>
+            </div>
+        </div>
+CHAPTER;
+}
+
+
+            }
+
+        }
+    }
+}
 
 ?>
+
 
