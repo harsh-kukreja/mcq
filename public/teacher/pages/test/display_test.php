@@ -16,7 +16,6 @@ $chapter_id = implode(",", $_POST["chapterCheckbox"]);
 if ($_POST["type"] === "auto-generate") {
 
     $question = $questionObject->getAllQuestionDetailsAndOptionsFromChapter("{$chapter_id}", "{$_POST["difficulty_level"]}");
-    print_r($question);
 
     ?>
     <div class="container">
@@ -106,6 +105,8 @@ $count = 0;
                 <th>Marks</th>
                 <th>Difficulty Level</th>
                 <th>Select</th>
+                <th></th>
+
                 </thead>
 
                 <tbody>
@@ -113,9 +114,9 @@ $count = 0;
                 <?php
                 for ($i = 0; $i < sizeof($chapter_id); $i++) {
                     $question = $questionObject->getAllQuestionsFromChapter("$chapter_id[$i]");
-//                    print_r($question);
-                    $array_keys = array_keys($question);
 
+                    $array_keys = array_keys($question);
+                    $marksCount = 0;
 
                     for ($j = 0; $j < sizeof($array_keys); $j++) {
                         $count++;
@@ -127,6 +128,8 @@ $count = 0;
 <td>{$question[$array_keys[$j]]['marks']}</td>
 <td>{$question[$array_keys[$j]]['difficulty_level']}</td>
 <td> <input type="checkbox" name="chapterCheckbox[]" value="{$array_keys[$j]}" ></td>
+<td><input type="text" value="{$question[$array_keys[$j]]['marks']}" id="question{$array_keys[$j]}" disabled hidden></td>
+
 </tr>
 CHAPTER;
 
@@ -141,17 +144,49 @@ CHAPTER;
             </table>
         </div>
 
-        <div class="mb-5 text-center"> marks : <?php echo $_POST['marks']?></div>
+        <div class="mb-5 text-center" id="mark">Marks : <span id="marksCount"></span>/<?php echo $_POST['marks']?></div>
     </form>
 </div>
 <script src="../../assets/js/jquery.min.js"></script>
 <script>
-    $(':checkbox').change(function () {
-        alert("ji");
-        if ($(this).is(':checked')) {
-            console.log($(this).val() + ' is now checked');
-        } else {
-            console.log($(this).val() + ' is now unchecked');
-        }
+    $(document).ready(function(){
+        var markCount = 0;
+        $(':checkbox').change(function () {
+
+            if ($(this).is(':checked')) {
+
+                var selected = "question"+$(this).val();
+
+                var marks = Number($('#'+selected).val());
+
+                 markCount += marks;
+                $.ajax({
+                    type: 'post',
+                    data: {selectedCheckbox:selected} ,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(response){
+                        $('#marksCount').html(markCount);
+                    }
+                });
+
+
+            } else {
+
+                var selected = "question"+$(this).val();
+
+                var marks = Number($('#'+selected).val());
+
+                markCount -= marks;
+                $.ajax({
+                    type: 'post',
+                    data: {selectedCheckbox:selected} ,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function(response){
+                        $('#marksCount').html(markCount);
+                    }
+                });
+            }
+        });
     });
+
 </script>
