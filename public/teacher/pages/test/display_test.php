@@ -151,7 +151,7 @@ CHAPTER;
 <script>
     $(document).ready(function(){
         var markCount = 0;
-        $(':checkbox').change(function () {
+        $(':checkbox').click(function (e) {
 
             if ($(this).is(':checked')) {
 
@@ -159,7 +159,15 @@ CHAPTER;
 
                 var marks = Number($('#'+selected).val());
 
-                 markCount += marks;
+                var totalMarks = Number(<?php echo $_POST['marks']?>);
+                var extraMarks = markCount + marks;
+
+                if(markCount < totalMarks && extraMarks <= totalMarks ){
+                    markCount +=marks;
+                }else{
+                    e.preventDefault();
+                    alert("exceded mark count");
+                }
                 $.ajax({
                     type: 'post',
                     data: {selectedCheckbox:selected} ,
