@@ -87,7 +87,7 @@ QUESTION;
        if(isset($_POST['questionCheckbox'])){
            foreach ($_POST["questionCheckbox"] as $value) {
                echo <<<QUESTION
-                         <input type="text" value="{$value}" name="questionCheckbox[]" >
+                         <input type="hidden" value="{$value}" name="questionCheckbox[]" >
 
 QUESTION;
            }
@@ -96,17 +96,17 @@ QUESTION;
        if(isset($_POST['chapterCheckbox'])) {
            for ($i = 0; $i < sizeof($_POST["chapterCheckbox"]); $i++) {
                echo <<<CHAPTER
-                         <input type="text" value="{$_POST['chapterCheckbox'][$i]}" name="chapterCheckbox[]">
+                         <input type="hidden" value="{$_POST['chapterCheckbox'][$i]}" name="chapterCheckbox[]">
 CHAPTER;
            }
        }
        ?>
-        <input type="text" value="<?php print_r( $_POST["subjectId"])?>" name="subjectId">
-        <input type="text" value="<?php print_r( $_POST["marks"])?>" name="marks">
+        <input type="hidden" value="<?php print_r( $_POST["subjectId"])?>" name="subjectId">
+        <input type="hidden" value="<?php print_r( $_POST["marks"])?>" name="marks">
 
 <!--            CHANGE THE TYPE IF YOU WANT I HAVE SET IT MANUALLY-->
 
-        <input type="text" value="<?php echo $_POST['type']?>" name="type">
+        <input type="hidden" value="<?php echo $_POST['type']?>" name="type">
         <div class="form-row">
             <div class="form-group col-6">
                 <label for="test_name">Test Name</label>

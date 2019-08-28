@@ -63,20 +63,20 @@ TABLE;
                 <?php
                 foreach ($questionIdArray as $value) {
                     echo <<<QUESTION
-                         <input type="text" value="{$value}" name="questionId[]" >
+                         <input type="hidden" value="{$value}" name="questionId[]" >
 
 QUESTION;
                 }
-                print_r($_POST["chapterCheckbox"]);
+                
                 for ($i = 0; $i < sizeof($_POST["chapterCheckbox"]); $i++) {
                     echo <<<CHAPTER
-                         <input type="text" value="{$_POST['chapterCheckbox'][$i]}" name="chapterCheckbox[]">
+                         <input type="hidden" value="{$_POST['chapterCheckbox'][$i]}" name="chapterCheckbox[]">
 CHAPTER;
 
                 }
                 if(isset($_POST['type'])){
                     echo <<<MARKS
-            <input type="text" value="{$_POST['type']}" name="type">
+            <input type="hidden" value="{$_POST['type']}" name="type">
 MARKS;
                 }
                 ?>
@@ -150,24 +150,24 @@ CHAPTER;
             if(isset($_POST['chapterCheckbox'])) {
             for ($i = 0; $i < sizeof($_POST["chapterCheckbox"]); $i++) {
             echo <<<CHAPTER
-            <input type="text" value="{$_POST['chapterCheckbox'][$i]}" name="chapterCheckbox[]">
+            <input type="hidden" value="{$_POST['chapterCheckbox'][$i]}" name="chapterCheckbox[]">
 CHAPTER;
             }
             }
 
             if(isset($_POST['marks'])){
                 echo <<<MARKS
-            <input type="text" value="{$_POST['marks']}" name="marks">
+            <input type="hidden" value="{$_POST['marks']}" name="marks">
 MARKS;
             }
 if(isset($_POST['type'])){
     echo <<<MARKS
-            <input type="text" value="{$_POST['type']}" name="type">
+            <input type="hidden" value="{$_POST['type']}" name="type">
 MARKS;
 }
 if(isset($_POST['subjectId'])){
     echo <<<MARKS
-            <input type="text" value="{$_POST['subjectId']}" name="subjectId">
+            <input type="hidden" value="{$_POST['subjectId']}" name="subjectId">
 MARKS;
 }
             ?>
