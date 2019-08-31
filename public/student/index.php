@@ -96,7 +96,7 @@ if(isset($_SESSION['role_id'])) {
                                         <div class="row">
                                             <div class="col">
 
-                                                <h5 class="card-title text-uppercase text-muted mb-0"><?php echo $first_name;echo " "; echo $last_name;?></h5>
+                                                <h5 class="card-title text-uppercase text-muted mb-0"><?php echo "By ".$first_name;echo " "; echo $last_name;?></h5>
                                                 <span class="h2 font-weight-bold mb-0"><?php echo $test_name?></span>
                                                 <div class="h5 font-weight-bold mb-0"><?php echo $total_marks?> MARKS</div>
                                             </div>
@@ -273,18 +273,21 @@ if(isset($_SESSION['role_id'])) {
         <!-- Core -->
         <?php
 
-        include_once("../../includes/core_scripts.php");
+//        include_once("../../includes/core_scripts.php");
+        include_once ($helper->getBasePath()."includes/core_scripts.php");
         ?>
         </body>
 
         <?php
     }//END OF IF
     else {
-        include_once("../../includes/no-access.php");
+//        include_once("../../includes/no-access.php");
+        include_once ($helper->getBasePath()."includes/no-access.php");
     }
 
 }else{
-        include_once ("../../includes/no-access.php");
+//        include_once ("../../includes/no-access.php");
+    include_once ($helper->getBasePath()."includes/no-access.php");
     }
     ?>
 
