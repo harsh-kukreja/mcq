@@ -7,7 +7,8 @@
  */
 
 include_once ("Users.class.php");
-include_once ("../../helpers/Helper.class.php");
+include_once($_SERVER['DOCUMENT_ROOT']."/mcq/helpers/Helper.class.php");
+$helper = new Helper();
 
 class Teacher extends Users {
     public $teacher_id;

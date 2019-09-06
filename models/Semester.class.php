@@ -21,10 +21,10 @@ class Semester{
      *
      */
     function includes(){
-        include_once ("../helpers/helper.class.php");
+        include_once ($_SERVER["DOCUMENT_ROOT"]."/mcq/helpers/helper.class.php");
         $helper = new Helper();
-        include_once "../includes/Crud.class.php";
-        include_once "../includes/functions.php";
+        include_once $_SERVER["DOCUMENT_ROOT"]."/mcq/includes/Crud.class.php";
+        include_once $_SERVER["DOCUMENT_ROOT"]."/mcq/includes/functions.php";
 //        $helper->getIncludes("Crud.class.php");
         $pdo = new Crud();
         return $pdo;
