@@ -24,5 +24,5 @@
 
     <!--    Custom CSS-->
     <link rel="stylesheet" href="<?php echo$helper->getAssets("css/styles.css")?>">
-
+    <link rel="stylesheet" href="<?php echo$helper->getAssets("css/quiz-custom-style.css")?>">
 </head>
