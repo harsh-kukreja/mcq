@@ -6,9 +6,11 @@
  * Time:
  */
 
+
+
+
 class Division{
     public $division_id,$division_name;
-
     public $pdo;
     public function __construct(){
         $this->pdo = $this->includes();
@@ -23,9 +25,10 @@ class Division{
      *
      */
     function includes(){
-        include_once ("../helpers/helper.class.php");
-        include "../includes/Crud.class.php";
-        include_once "../includes/functions.php";
+        include_once($_SERVER["DOCUMENT_ROOT"] . "/mcq/helpers/Helper.class.php");
+        $helper = new Helper();
+        include_once($helper->getBasePath() . "/includes/Crud.class.php");
+        include_once($helper->getBasePath() . "/includes/functions.php");
         $pdo = new Crud();
         return $pdo;
     }
@@ -84,4 +87,18 @@ class Division{
         }
         return null;
     }
+    function getAllDivision(){
+        $query = "SELECT * FROM division WHERE branch_id = '".$_POST['branch_id']."' ORDER BY division_name";
+        $pdoObject = new PdoConnection();
+        $connection  = $pdoObject->connectPdo();
+        $statement = $connection->prepare($query);
+        $statement->execute();
+        $division = '';
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+            $division .= '<option value="'.$row["division_id"].'">'.$row["division_name"].'</option>';
+        }
+        return $division;
+    }
+
+
 }

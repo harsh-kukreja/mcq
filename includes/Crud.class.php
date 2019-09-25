@@ -11,17 +11,18 @@ include_once ("PdoConnection.class.php");
 class Crud{
 
     public function insertDb($table_name,$rows,$values){
+
         $pdoObject = new PdoConnection();
         $pdo = $pdoObject->connectPdo();
         $row_values= implode(',',$rows);
         $values = implode(',',$values);
         $statement = $pdo->prepare("INSERT INTO $table_name($row_values) VALUES ($values)");
-        // die("INSERT INTO $table_name($row_values) VALUES ($values)");
+         //die("INSERT INTO $table_name($row_values) VALUES ($values)");
         //  echo "INSERT INTO $table_name($row_values) VALUES ($values)";
 
         $stmt = $statement->execute();
         if($stmt) {
-            echo "inserted sucessfullyy";
+            //echo "inserted sucessfullyy";
             //return true;
         }
         else {
@@ -29,12 +30,14 @@ class Crud{
             //return false;
         }
     }
+
     public function updateDb($table_name,$field,$condition=0){
         $pdoObject = new PdoConnection();
         $pdo = $pdoObject->connectPdo();
         if(is_array($field)){
             $fields= implode(',',$field);
             $statement = $pdo->prepare("UPDATE $table_name SET $fields WHERE $condition");
+
         }
         else{
             $statement = $pdo->prepare("UPDATE $table_name SET $field WHERE $condition");
@@ -46,10 +49,11 @@ class Crud{
         $stmt = $statement->execute();
 
         if($stmt){
-            echo "updated sucessfullyy";
+            //echo "updated sucessfullyy";
             //return true;
         }
         else{
+
             echo "not updated";
             //return false;
         }

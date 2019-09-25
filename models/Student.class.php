@@ -10,7 +10,9 @@ class Student extends Users {
     public $student_id,$batch_id,$semester_id;
 
     function creatStudent(){}
-    function deleteStudent(){}
+    function deleteStudent(){
+
+    }
     function updateStudent(){}
     function addStudent(){}
     function getBatch(){}

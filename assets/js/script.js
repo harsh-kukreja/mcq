@@ -64,12 +64,94 @@ $(document).ready(function(){
 
         }
 
-
     });
 
-
-
 });
+
+
+$(document).ready(function () {
+    $('#branch').change(function () {
+        var branch_id = $('#branch').val();
+            $.ajax({
+                url: "pages/test.php",
+                type: "POST",
+                data: {
+                    branch_id: branch_id,
+                    trigger: "division"
+                },
+                dataType: 'text',
+                success: function (data) {
+                    $("#division").html(data);
+                },
+            });
+
+    });
+});
+
+$(document).ready(function () {
+    $('#division').change(function () {
+        var division_id = $('#division').val();
+        var branch_id = $('#branch').val();
+            $.ajax({
+                url: "pages/test.php",
+                type: "POST",
+                data: {
+                    branch_id: branch_id,
+                    division_id: division_id,
+                    trigger:"semester"
+                },
+                dataType: 'text',
+                success: function (data) {
+                    $("#semester").html(data);
+                }
+            });
+
+    });
+});
+
+$(document).ready(function () {
+    $('#semester').change(function () {
+        var division_id = $('#division').val();
+        var branch_id = $('#branch').val();
+        $.ajax({
+            url: "pages/test.php",
+            type: "POST",
+            data: {
+                division_id: division_id,
+                trigger:"batch"
+            },
+            dataType: 'text',
+            success: function (data) {
+                $("#batch").html(data);
+            }
+        });
+    });
+});
+
+$(document).ready(function () {
+    $('#semester').change(function () {
+        var semester_id = $('#semester').val();
+        $.ajax({
+            url: "pages/test.php",
+            type: "POST",
+            data: {
+                semester_id: semester_id,
+                trigger:"Subject"
+            },
+            dataType: 'text',
+            success: function (data) {
+                $("#subject").html(data);
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
 
 
 

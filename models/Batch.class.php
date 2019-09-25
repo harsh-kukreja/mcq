@@ -34,9 +34,10 @@ class Batch{
      *
      */
     function includes(){
-        include_once ("../helpers/helper.class.php");
-        include "../includes/Crud.class.php";
-        include_once "../includes/functions.php";
+        include_once($_SERVER["DOCUMENT_ROOT"] . "/mcq/helpers/Helper.class.php");
+        $helper = new Helper();
+        include_once($helper->getBasePath() . "/includes/Crud.class.php");
+        include_once($helper->getBasePath() . "/includes/functions.php");
         $pdo = new Crud();
         return $pdo;
     }
@@ -104,4 +105,20 @@ class Batch{
         }
         return null;
     }
+
+
+
+    function getAllBatch(){
+        $query = "SELECT * FROM batch WHERE division_id = '".$_POST['division_id']."' ORDER BY batch_name";
+        $pdoObject = new PdoConnection();
+        $connection  = $pdoObject->connectPdo();
+        $statement = $connection->prepare($query);
+        $statement->execute();
+        $batch = '';
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+            $batch .= '<option value="'.$row["batch_id"].'">'.$row["batch_name"].'</option>';
+        }
+        return $batch;
+    }
+
 }

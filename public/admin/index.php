@@ -3,9 +3,10 @@
 <?php
 ob_start();
 $page_title = "Admin";
-include_once("../../helpers/Helper.class.php");
+include_once($_SERVER["DOCUMENT_ROOT"]."/mcq/helpers/Helper.class.php");
 $helper = new Helper();
-include_once ("../../includes/header.php");
+include_once ($helper->getBasePath()."/includes/header.php");
+
 session_start();
 if(isset($_SESSION['role_id'])) {
 
@@ -190,15 +191,9 @@ if(isset($_SESSION['role_id'])) {
         </body>
         <?php
     }//END OF IF
-
-    else {
-        include_once("../../includes/no-access.php");
-    }
-
-}    else {
+}else {
     include_once("../../includes/no-access.php");
 }
-
 ?>
 
 </html>

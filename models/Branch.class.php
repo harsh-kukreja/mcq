@@ -35,10 +35,10 @@ class Branch{
      *
      */
     function includes(){
-        include_once ("../helpers/helper.class.php");
+        include_once($_SERVER["DOCUMENT_ROOT"] . "/mcq/helpers/Helper.class.php");
         $helper = new Helper();
-        include "../includes/Crud.class.php";
-//        $helper->getIncludes("Crud.class.php");
+        include_once($helper->getBasePath() . "/includes/Crud.class.php");
+        include_once($helper->getBasePath() . "/includes/functions.php");
         $pdo = new Crud();
         return $pdo;
     }
@@ -86,6 +86,19 @@ class Branch{
         $field= array("branch_name = ".$this->convertToString($branch_name),"branch_code = ".$this->convertToString($branch_code),"created_by = ".$this->convertToString($created_by),"updated_by = ".$this->convertToString($updated_by));
 
         $this->pdo->updateDb("branch",$field,$condition);
+    }
+
+    function getAllBranch(){
+        $query = "SELECT * FROM branch ORDER BY branch_name";
+        $pdoObject = new PdoConnection();
+        $connection  = $pdoObject->connectPdo();
+        $statement = $connection->prepare($query);
+        $statement->execute();
+        $branch ='';
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+            $branch .= '<option value="'.$row["branch_id"].'">'.$row["branch_name"].'</option>';
+        }
+        return($branch);
     }
 
 

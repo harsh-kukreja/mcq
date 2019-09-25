@@ -21,11 +21,10 @@ class Semester{
      *
      */
     function includes(){
-        include_once ("../helpers/helper.class.php");
+        include_once($_SERVER["DOCUMENT_ROOT"] . "/mcq/helpers/Helper.class.php");
         $helper = new Helper();
-        include_once "../includes/Crud.class.php";
-        include_once "../includes/functions.php";
-//        $helper->getIncludes("Crud.class.php");
+        include_once($helper->getBasePath() . "/includes/Crud.class.php");
+        include_once($helper->getBasePath() . "/includes/functions.php");
         $pdo = new Crud();
         return $pdo;
     }
@@ -108,6 +107,20 @@ class Semester{
 
         }
 
+    }
+
+    function getAllSemester(){
+        $query = "SELECT * FROM semester WHERE branch_id = '".$_POST['branch_id']."' Order BY semester_number";
+        $pdoObject = new PdoConnection();
+        $connection  = $pdoObject->connectPdo();
+        $statement = $connection->prepare($query);
+        $statement->execute();
+        $semester = '';
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)){
+
+            $semester .= '<option value="'.$row["semester_id"].'">'.$row["semester_number"].'</option>';
+        }
+        return $semester;
     }
 
 }
