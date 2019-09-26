@@ -7,6 +7,7 @@
  */
 
 if(isset($_POST["submit_test_details"])){
+
     //FOR TESTING
 //    echo " TEST NAME: ".$_POST["test_name"];
 //    echo "  PASSING MARKS:  ".$_POST["passing_marks"]."\n";
@@ -51,12 +52,22 @@ if(isset($_POST["submit_test_details"])){
      for( $i=0;$i<sizeof($_POST["chapterCheckbox"]);$i++){
          $testObj->createTestChapter($rowForTestId[0]["test_id"],$_POST["chapterCheckbox"][$i]);
      }
-     for($i=0;$i<sizeof($_POST["questionId"]);$i++){
-         $testObj->createTestQuestion($rowForTestId[0]["test_id"],
-                                        $_POST["subjectId"],
-                                        $_POST["questionId"][$i],
-                                        $rowForTeacherId[0]["teacher_id"]
-         );
+     if(isset($_POST['questionId'])){
+         for($i=0;$i<sizeof($_POST["questionId"]);$i++){
+             $testObj->createTestQuestion($rowForTestId[0]["test_id"],
+                 $_POST["subjectId"],
+                 $_POST["questionId"][$i],
+                 $rowForTeacherId[0]["teacher_id"]
+             );
+         }
+     } else if(isset($_POST['questionCheckbox'])){
+         for($i=0;$i<sizeof($_POST["questionCheckbox"]);$i++){
+             $testObj->createTestQuestion($rowForTestId[0]["test_id"],
+                 $_POST["subjectId"],
+                 $_POST["questionCheckbox"][$i],
+                 $rowForTeacherId[0]["teacher_id"]
+             );
+         }
      }
 }
 ?>
@@ -64,26 +75,38 @@ if(isset($_POST["submit_test_details"])){
 <div class="container">
     <form method="post">
        <?php
-       foreach ($_POST["questionId"] as $value){
-           echo<<<QUESTION
-                         <input type="text" value="{$value}" name="questionId[]" >
+
+       if(isset($_POST['questionId'])) {
+           foreach ($_POST["questionId"] as $value) {
+               echo <<<QUESTION
+                         <input type="hidden" value="{$value}" name="questionId[]" >
 
 QUESTION;
+           }
        }
-       for($i=0;$i<sizeof($_POST["chapterCheckbox"]);$i++){
-           echo<<<CHAPTER
-                         <input type="text" value="{$_POST['chapterCheckbox'][$i]}" name="chapterCheckbox[]">
-CHAPTER;
+       if(isset($_POST['questionCheckbox'])){
+           foreach ($_POST["questionCheckbox"] as $value) {
+               echo <<<QUESTION
+                         <input type="hidden" value="{$value}" name="questionCheckbox[]" >
 
+QUESTION;
+           }
+       }
+
+       if(isset($_POST['chapterCheckbox'])) {
+           for ($i = 0; $i < sizeof($_POST["chapterCheckbox"]); $i++) {
+               echo <<<CHAPTER
+                         <input type="hidden" value="{$_POST['chapterCheckbox'][$i]}" name="chapterCheckbox[]">
+CHAPTER;
+           }
        }
        ?>
-
         <input type="hidden" value="<?php print_r( $_POST["subjectId"])?>" name="subjectId">
         <input type="hidden" value="<?php print_r( $_POST["marks"])?>" name="marks">
 
 <!--            CHANGE THE TYPE IF YOU WANT I HAVE SET IT MANUALLY-->
 
-        <input type="hidden" value="auto-generate" name="type">
+        <input type="hidden" value="<?php echo $_POST['type']?>" name="type">
         <div class="form-row">
             <div class="form-group col-6">
                 <label for="test_name">Test Name</label>

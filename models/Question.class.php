@@ -39,8 +39,7 @@ WHERE chapter.subject_id = {$subject_id}";
         else
 	        $query .= "
             ORDER BY chapter.chapter_id()";
-        
-    
+
         $pdoconn = new PdoConnection();
         $pdo = $pdoconn->connectPdo();
         $rs = $pdo->query($query);
@@ -135,8 +134,7 @@ WHERE option.question_id = question.question_id AND chapter.subject_id = {$subje
 	 * @return array : All questions from the given chapter in the form of an associative array.
 	 */
     function getAllQuestionsFromChapter($chapter_id, $random = false) {
-    	$query = "SELECT question.question_id, question.question FROM question WHERE question.chapter_id = {$chapter_id}";
-	
+    	$query = "SELECT question.question_id, question.question , question.marks , question.difficulty_level FROM question WHERE question.chapter_id = {$chapter_id}";
 		if ($random == true)
 			$query .= "
             ORDER BY RAND()";
@@ -147,7 +145,7 @@ WHERE option.question_id = question.question_id AND chapter.subject_id = {$subje
 		$questions = array();
 	
 		while($row = $rs->fetch(PDO::FETCH_ASSOC)) {
-			$questions[$row["question_id"]] = $row["question"];
+			$questions[$row["question_id"]] = array("question" => $row["question"] , "marks" => $row["marks"] , "difficulty_level" => $row['difficulty_level']) ;
 		}
 		
 		return $questions;
@@ -203,7 +201,7 @@ WHERE question.question_id = option.question_id AND question.chapter_id = {$chap
 	 *
 	 * */
 
-    function getAllQuestionDetailsAndOptionsFromChapter($chapter_id,$difficult_level , $random = false) {
+        function getAllQuestionDetailsAndOptionsFromChapter($chapter_id,$difficult_level , $random = false) {
         $query = "SELECT question.question_id, question.question, option.option_id, option.option, question.difficulty_level,question.marks FROM question, option
 WHERE question.question_id = option.question_id  AND question.chapter_id IN  ({$chapter_id})  AND question.difficulty_level <={$difficult_level}
 ORDER BY question.difficulty_level  DESC";

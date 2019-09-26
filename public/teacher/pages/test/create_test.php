@@ -73,16 +73,16 @@ $rowForChapter=$crud->executeQuery($queryForChapterName);
                 <label for="type" class="form-control-label">Type</label>
 
                 <select class="form-control " name="type">
-                    <option disabled selected="true">Default select</option>
-                    <option value="generate"> Generate Test</option>
-                    <option value="auto-generate">Auto Generate</option>
+
+                    <option value="0">Manual Generation</option>
+                    <option value="1">Auto Generate</option>
                 </select>
             </div>
             <div class="form-group col-6">
                 <label for="difficulty_level" class="form-control-label">Type</label>
 
                 <select class="form-control " name="difficulty_level">
-                    <option disabled selected="true">Default select</option>
+
                     <option value="1">Easy</option>
                     <option value="2">Medium</option>
                     <option value="3">Hard</option>
