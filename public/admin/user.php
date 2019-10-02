@@ -52,8 +52,11 @@ if(isset($_SESSION['role_id'])) {
                 case "edit_teacher":
                     include_once ("pages/teacher/edit-teacher.php");
                     break;
-                case "view_all_teacher":
+                case "view_all_teachers":
                     include_once ("pages/teacher/view-all-teacher.php");
+                    break;
+                case "add_branch":
+                    include_once ("pages/branch/add-branch.php");
                     break;
                 default:
                     include_once ("pages/student/view-all-students.php");

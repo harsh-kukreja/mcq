@@ -11,57 +11,48 @@ $helper = new Helper();
 include_once ($helper->getBasePath()."/includes/PdoConnection.class.php");
 include_once ($helper->getBasePath()."/includes/Crud.class.php");
 
-if(isset($_POST['edit'])){
-    include_once($helper->getBasePath() . "/includes/functions.php");
-    include_once($helper->getBasePath() . "/includes/PdoConnection.class.php");
-    include_once($helper->getBasePath() . "/includes/Crud.class.php");
+if(isset($_GET['teacher_id'])){
 
 
-    $edit = new Crud();
-
-    $user_id = $_SESSION['user_id'];
-    $teacher_id = $_GET['teacher_id'];
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $address = $_POST['address'];
-    $email = $_POST['email'];
-    $contact = $_POST['contact'];
-    $images = $_FILES["images"]["name"];
-    $image = $_FILES['images']['name'];
-    $post_image_temp = $_FILES['images']['tmp_name'];
-    $about_me = $_POST["about_me"];
-    move_uploaded_file($post_image_temp, "../images/$image");
-
-    $branch_id = $_POST['branch_id'];
-    $semester_number = $_POST['semester_number'];
-    $division_id = $_POST['division_id'];
-    $subject_id = $_POST['subject_id'];
-    $batch_id = $_POST['batch_id'];
+    if(isset($_POST['edit'])){
+        include_once($helper->getBasePath() . "/includes/functions.php");
+        include_once($helper->getBasePath() . "/includes/PdoConnection.class.php");
+        include_once($helper->getBasePath() . "/includes/Crud.class.php");
 
 
+        $edit = new Crud();
 
-    $pdoObject = new PdoConnection();
-    $pdo = $pdoObject->connectPdo();
-    $statement = $pdo->prepare($query = "SELECT user.person_id FROM teacher INNER JOIN user ON teacher.user_id = user.user_id INNER JOIN person ON user.person_id = person.person_id WHERE teacher_id = $teacher_id");
-    $statement->execute();
-    $person_id = null;
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $person_id = $row["person_id"];
+
+        $user_id = $_SESSION['user_id'];
+        $teacher_id = $_GET['teacher_id'];
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $address = $_POST['address'];
+        $email = $_POST['email'];
+        $contact = $_POST['contact'];
+        $images = $_FILES["images"]["name"];
+        $image = $_FILES['images']['name'];
+        $post_image_temp = $_FILES['images']['tmp_name'];
+        $about_me = $_POST["about_me"];
+        move_uploaded_file($post_image_temp, "../images/$image");
+
+
+
+
+
+        $pdoObject = new PdoConnection();
+        $pdo = $pdoObject->connectPdo();
+        $statement = $pdo->prepare($query = "SELECT user.person_id FROM teacher INNER JOIN user ON teacher.user_id = user.user_id INNER JOIN person ON user.person_id = person.person_id WHERE teacher_id = $teacher_id");
+        $statement->execute();
+        $person_id = null;
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $person_id = $row["person_id"];
+        }
+
+        $edit_person = array("first_name=".convertToString("$first_name"),"last_name=".convertToString("$last_name"),"address=".convertToString("$address"),"email=".convertToString("$email"),"contact=".convertToString("$contact"),"image=".convertToString("$image"),"about_me=".convertToString("$about_me"),"updated_by=".convertToString("$user_id"));
+        $edit->updateDb("person",$edit_person,"person_id=$person_id");
     }
 
-
-
-
-    $edit_person = array("first_name=".convertToString("$first_name"),"last_name=".convertToString("$last_name"),"address=".convertToString("$address"),"email=".convertToString("$email"),"contact=".convertToString("$contact"),"image=".convertToString("$image"),"about_me=".convertToString("$about_me"),"updated_by=".convertToString("$user_id"));
-    $edit->updateDb("person",$edit_person,"person_id=$person_id");
-
-
-
-    $edit_sem = array("division_id=".convertToString("$division_id"),"subject_id=".convertToString("$subject_id"),"batch_id=".convertToString("$batch_id"));
-    $edit->updateDb("teaches",$edit_sem,"teacher_id = $teacher_id");
-}
-
-if(isset($_GET['teacher_id'])){
     $teacher_id = $_GET['teacher_id'];
     $pdoObject = new PdoConnection();
     $pdo = $pdoObject->connectPdo();
@@ -85,7 +76,9 @@ if(isset($_GET['teacher_id'])){
         $branch = $row['branch_name'];
         $semester = $row['semester_number'];
         $subject_id = $row['subject_id'];
+
     }
+
 
     ?>
     <div class="container">
@@ -102,17 +95,17 @@ if(isset($_GET['teacher_id'])){
                 </div>
                 <div class="col-6">
                     <label class="form-control-label" for="last_name">Last Name</label>
-                    <input class="form-control" value="<?php echo $last_name;?>"type="search" placeholder="" name="last_name" id="last_name">
+                    <input class="form-control" value="<?php echo $last_name;?>" type="search" placeholder="" name="last_name" id="last_name">
                 </div>
                 <div class="col-6">
                     <label for="example-search-input" class="form-control-label">Email</label>
-                    <input class="form-control" value="<?php echo $email ;?>"type="search" placeholder="" id="email" name="email">
+                    <input class="form-control" value="<?php echo $email ;?>" type="search" placeholder="" id="email" name="email">
                 </div>
 
 
                 <div class="col-6">
                     <label for="example-search-input" class="form-control-label">Contact</label>
-                    <input class="form-control" value="<?php echo $contact;?>"type="search" placeholder="" id="contact" name="contact">
+                    <input class="form-control" value="<?php echo $contact;?>" type="search" placeholder="" id="contact" name="contact">
                 </div>
 
                 <div class="col-6">
@@ -124,6 +117,8 @@ if(isset($_GET['teacher_id'])){
                         $branch_object = new Branch();
                         $branch_details = $branch_object->getAllBranch();
                         print_r($branch_details);
+
+
 
                         echo "<option value='$branch_id'selected>$branch</option>";
 

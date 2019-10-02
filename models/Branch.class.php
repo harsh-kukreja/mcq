@@ -102,6 +102,8 @@ class Branch{
     }
 
 
+
+
 }
 //$branch = new Branch();
 //$branch->updateBranch("Civil Engineering","CE",1,1,'branch_id = 8');
