@@ -50,27 +50,7 @@ if(isset($_POST['add'])) {
     $insert->insertDb("user", $insert_user, $output_user);
 
 
-    $pdoObject = new PdoConnection();
-    $pdo = $pdoObject->connectPdo();
-    $statement = $pdo->prepare($query = "SELECT student_id FROM student ORDER BY student_id  DESC LIMIT 1");
-    $statement->execute();
-    $student_id = null;
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $student_id = $row["student_id"];
-    }
 
-    $pdoObject = new PdoConnection();
-    $pdo = $pdoObject->connectPdo();
-    $statement = $pdo->prepare($query = "SELECT parent_id FROM parent ORDER BY parent_id DESC LIMIT 1");
-    $statement->execute();
-    $parent_id = null;
-    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        $parent_id = $row["parent_id"];
-    }
-
-    $insert_parent_student = array("parent_id", "student_id", "created_by");
-    $output_parent_student = array(convertToString($parent_id), convertToString($student_id), convertToString($role_id));
-    $insert->insertDb("parent_student", $insert_parent_student, $output_parent_student);
 
 
     $pdoObject = new PdoConnection();
@@ -85,6 +65,14 @@ if(isset($_POST['add'])) {
     $insert_student = array("user_id","semester_id","batch_id","created_by");
     $output_student = array(convertToString($student_user_id), convertToString($semester), convertToString($batch),convertToString($role_id));
     $insert->insertDb("student",$insert_student,$output_student);
+
+
+
+
+
+
+
+
 
 
     //*************************inserting parent details********************************************//
@@ -138,6 +126,31 @@ if(isset($_POST['add'])) {
     $parent_insert = array("user_id", "created_by");
     $parent_values = array(convertToString($user_id_parent), convertToString($role));
     $insert->insertDb("parent", $parent_insert, $parent_values);
+
+
+
+    //insering details into parent_student table
+    $pdoObject = new PdoConnection();
+    $pdo = $pdoObject->connectPdo();
+    $statement = $pdo->prepare($query = "SELECT student_id FROM student ORDER BY student_id  DESC LIMIT 1");
+    $statement->execute();
+    $student_id = null;
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $student_id = $row["student_id"];
+    }
+
+    $pdoObject = new PdoConnection();
+    $pdo = $pdoObject->connectPdo();
+    $statement = $pdo->prepare($query = "SELECT parent_id FROM parent ORDER BY parent_id DESC LIMIT 1");
+    $statement->execute();
+    $parent_id = null;
+    while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+        $parent_id = $row["parent_id"];
+    }
+
+    $insert_parent_student = array("parent_id", "student_id", "created_by");
+    $output_parent_student = array(convertToString($parent_id), convertToString($student_id), convertToString($role_id));
+    $insert->insertDb("parent_student", $insert_parent_student, $output_parent_student);
 
 }
 ?>

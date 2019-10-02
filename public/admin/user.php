@@ -43,6 +43,9 @@ if(isset($_SESSION['role_id'])) {
                 case "edit_student":
                     include_once ("pages/student/edit-student.php");
                     break;
+                case "delete_student":
+                    include_once ("pages/student/delete-student.php");
+                    break;
                 case "view_all_students":
                     include_once ("pages/student/view-all-students.php");
                     break;
