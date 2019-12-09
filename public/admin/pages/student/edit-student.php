@@ -10,12 +10,60 @@ include_once($_SERVER["DOCUMENT_ROOT"]."/mcq/helpers/Helper.class.php");
 $helper = new Helper();
 include_once ($helper->getBasePath()."/includes/PdoConnection.class.php");
 include_once ($helper->getBasePath()."/includes/Crud.class.php");
-if(isset($_POST['edit'])){
 
-}
 
 
 if(isset($_GET['stud_id'])){
+
+    if(isset($_POST['edit'])){
+        include_once($helper->getBasePath() . "/includes/functions.php");
+        include_once($helper->getBasePath() . "/includes/PdoConnection.class.php");
+        include_once($helper->getBasePath() . "/includes/Crud.class.php");
+
+
+        $edit = new Crud();
+
+        $user_id = $_SESSION['user_id'];
+        $student_id = $_GET['stud_id'];
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $address = $_POST['address'];
+        $email = $_POST['email'];
+        $contact = $_POST['contact'];
+        $division = $_POST['division'];
+        $branch = $_POST['branch'];
+        $semester = $_POST['semester'];
+        $batch = $_POST['batch'];
+
+
+        $images = $_FILES["images"]["name"];
+        $image = $_FILES['images']['name'];
+        $post_image_temp = $_FILES['images']['tmp_name'];
+        $about_me = $_POST["about_me"];
+        move_uploaded_file($post_image_temp, "../images/$image");
+
+
+        $pdoObject = new PdoConnection();
+        $pdo = $pdoObject->connectPdo();
+        $statement = $pdo->prepare($query = "SELECT user.person_id FROM student INNER JOIN user ON student.user_id = user.user_id INNER JOIN person ON user.person_id = person.person_id WHERE student_id = $student_id");
+        $statement->execute();
+        $person_id = null;
+        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            $person_id = $row["person_id"];
+        }
+
+        $edit_person = array("first_name=".convertToString($first_name),"last_name=".convertToString($last_name),"address=".convertToString($address),"email=".convertToString($email),"contact=".convertToString($contact),"image=".convertToString($image),"about_me=".convertToString($about_me),"updated_by=".convertToString($user_id));
+        $edit->updateDb("person",$edit_person,"person_id=$person_id");
+
+
+        $edit_student = array("semester_id=".convertToString($semester),"batch_id=".convertToString($batch));
+        $edit->updateDb("student",$edit_student,"student_id = $student_id");
+
+    }
+
+
+
+
     $edit_student_id = $_GET['stud_id'];
     $pdoObject = new PdoConnection();
     $pdo = $pdoObject->connectPdo();

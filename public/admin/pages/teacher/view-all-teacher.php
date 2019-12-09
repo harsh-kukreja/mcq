@@ -40,7 +40,7 @@ include_once ($helper->getBasePath()."/includes/Crud.class.php");
                 <?php
                 $pdoObject = new PdoConnection();
                 $pdo = $pdoObject->connectPdo();
-                $statement = $pdo->prepare($query="SELECT person.first_name, person.last_name, person.email, person.address, person.image, person.about_me , person.contact, batch.batch_name, batch.batch_id ,division.division_name, division.division_id, branch.branch_name, branch.branch_id, branch.branch_code, semester.semester_number ,teacher.teacher_id ,subject.subject_id, subject.subject_name FROM teacher INNER JOIN user ON teacher.user_id = user.user_id INNER JOIN person ON user.person_id = person.person_id INNER JOIN batch ON teacher.user_id = batch.batch_id INNER JOIN division ON batch.division_id = division.division_id INNER JOIN branch ON division.branch_id = branch.branch_id INNER JOIN semester ON teacher.user_id = semester.semester_id INNER JOIN subject ON semester.semester_id = subject.subject_id");
+                $statement = $pdo->prepare($query="SELECT teacher.teacher_id,person.first_name,person.last_name,person.address,person.email,person.contact,batch.batch_name,division.division_name,branch.branch_name ,semester.semester_number ,subject.subject_name from person INNER JOIN user ON person.person_id = user.person_id INNER JOIN teacher ON user.user_id = teacher.user_id INNER JOIN teaches ON teacher.teacher_id = teaches.teacher_id INNER JOIN division ON teaches.division_id = division.division_id INNER JOIN branch ON division.branch_id = branch.branch_id INNER JOIN subject ON teaches.subject_id = subject.subject_id INNER JOIN semester ON subject.semester_id = semester.semester_id INNER JOIN batch ON teaches.batch_id = batch.batch_id WHERE teacher.deleted = 0");
                 $statement->execute();
                 while($row =$statement->fetch(PDO::FETCH_ASSOC)){
                     $teacher_id = $row['teacher_id'];
@@ -54,7 +54,7 @@ include_once ($helper->getBasePath()."/includes/Crud.class.php");
                     $branch = $row['branch_name'];
                     $semester = $row['semester_number'];
                     $subject = $row['subject_name'];
-                    echo <<<STUDENT
+                    echo <<<TEACHER
 <tr>
 <td>$teacher_id</td>
 <td>$first_name</td>
@@ -67,8 +67,9 @@ include_once ($helper->getBasePath()."/includes/Crud.class.php");
 <td>$batch</td>
 <td>$subject</td>
 <td><a href="user.php?source=edit_teacher&teacher_id=$teacher_id" class="btn btn-info"><span class="fa fa-edit"></i></span></a></td>
+<td><a href="user.php?source=delete_teacher&teacher_id=$teacher_id" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
 </tr>
-STUDENT;
+TEACHER;
                 }
                 ?>
                 </tbody >
