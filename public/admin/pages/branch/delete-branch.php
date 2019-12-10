@@ -16,12 +16,12 @@ $pdoObject = new PdoConnection();
 $pdo = $pdoObject->connectPdo();
 $delete = new Crud();
 
-$batch_id = $_GET['batch_id'];
+$branch_id = $_GET['branch_id'];
 //$delete_branch = array("deleted=".convertToString(1));
 //$delete->updateDb("division",$delete_branch,"division_id = $batch_id");
 
-$delete_batch = array("deleted=".convertToString(1));
-$delete->updateDb("batch",$delete_batch,"division_id = $batch_id");
+$delete_branch = array("deleted=".convertToString(1));
+$delete->updateDb("branch",$delete_branch,"branch.branch_id= $branch_id");
 //
 //$delete_branch = array("deleted=".convertToString(1));
 //$delete->updateDb("branch",$delete_branch,"");

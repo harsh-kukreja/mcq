@@ -100,7 +100,7 @@ if(isset($_GET['stud_id'])){
 
     ?>
         <div class="container">
-            <form action="" method="post" role="form" enctype="multipart/form-data">
+            <form action="view-all-students.php" method="post" role="form" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="col-12">
 

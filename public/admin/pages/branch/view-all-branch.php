@@ -38,16 +38,16 @@ $pdo = $pdoObject->connectPdo();
                 <?php
                 $pdoObject = new PdoConnection();
                 $pdo = $pdoObject->connectPdo();
-                $statement = $pdo->prepare($query="SELECT batch.batch_id,branch.branch_id,branch.branch_name,batch.batch_name,division.division_name from batch LEFT JOIN division ON batch.batch_id = division.division_id INNER JOIN branch ON division.branch_id = branch.branch_id where batch.deleted = 0");
+                $statement = $pdo->prepare($query="SELECT branch.branch_id,branch.branch_name,batch.batch_name,division.division_name from batch LEFT JOIN division ON batch.division_id = division.division_id INNER JOIN branch ON division.branch_id = branch.branch_id where branch.deleted = 0");
 
                 $statement->execute();
                 while($row = $statement->fetch(PDO::FETCH_ASSOC)){
 
+                    $branch_id = $row['branch_id'];
                     $branch = $row['branch_name'];
                     $batch = $row['batch_name'];
                     $division = $row['division_name'];
-                    $batch_id = $row['batch_id'];
-                    $branch_id = $row['branch_id'];
+
 
                     echo <<<STUDENT
                         
@@ -57,7 +57,7 @@ $pdo = $pdoObject->connectPdo();
 <td>$division</td>
 <td>$batch</td>
 <td><a href="user.php?source=edit_branch&branch_id=$branch_id" class="btn btn-info"><span class="fa fa-edit"></i></span></a></td>
-<td><a href="user.php?source=delete_branch&batch_id=$batch_id" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
+<td><a href="user.php?source=delete_branch&branch_id=$branch_id" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
 </tr>
 STUDENT;
                 }
